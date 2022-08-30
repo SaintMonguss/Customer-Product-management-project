@@ -3,7 +3,7 @@
 
 
 Client:: Client(string name, string phoneNumber, string adress, string email)
-	: m_name(name), m_phoneNumber(phoneNumber), m_adress(adress), m_email(email) {}
+	: m_name(name), m_phoneNumber(phoneNumber), m_adress(adress), m_Email(email) {}
 
 string Client::GetName() const
 {
@@ -20,9 +20,9 @@ string Client::GetAdress() const
 	return m_adress;
 }
 
-string Client::Getemail() const
+string Client::GetEmail() const
 {
-	return m_email;
+	return m_Email;
 }
 
 void Client::SetName(string name)
@@ -40,7 +40,7 @@ void Client::SetAdress(string adress)
 	m_adress = adress;
 }
 
-void Client::Setemail(string email)
+void Client::SetEmail(string email)
 {
-	m_email = email;
+	m_Email = email;
 }

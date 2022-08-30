@@ -15,12 +15,12 @@ private:
 	string m_name;
 	string m_phoneNumber;
 	string m_adress;
-	string m_email;
+	string m_Email;
 
 public:
 	Client() 
 	{
-		m_name = "", m_phoneNumber = "", m_adress = "", m_email = "";
+		m_name = "", m_phoneNumber = "", m_adress = "", m_Email = "";
 	}
 
 	Client(string, string, string, string);
@@ -31,7 +31,7 @@ public:
 
 	string GetAdress() const;
 
-	string Getemail() const;
+	string GetEmail() const;
 
 	void SetName(string );
 
@@ -39,7 +39,7 @@ public:
 
 	void SetAdress(string );
 
-	void Setemail(string );
+	void SetEmail(string );
 };
 
 #endif
