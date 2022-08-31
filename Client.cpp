@@ -2,8 +2,11 @@
 #include <iostream>
 
 
-Client:: Client(string name, string phoneNumber, string adress, string email)
-	: m_name(name), m_phoneNumber(phoneNumber), m_adress(adress), m_Email(email) {}
+Client::Client(int id)
+	: m_id(id), m_name(""), m_phoneNumber(""), m_adress(""), m_Email("") {}
+
+Client:: Client(int id, string name, string phoneNumber, string adress, string email)
+	: m_id(id), m_name(name), m_phoneNumber(phoneNumber), m_adress(adress), m_Email(email) {}
 
 string Client::GetName() const
 {
