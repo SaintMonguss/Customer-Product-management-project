@@ -23,9 +23,10 @@ public:
 	ClientManager(map<int, Client*>);
 
 	virtual void AddObj() override;
-	virtual void DelObj() override;
-	virtual void ModiObj() override;
-	virtual void SerchObj() override;
+	virtual void DelObj(int) override;
+	virtual void ModiObj(int) override;
+	virtual void SerchObj(int) override;
+	virtual void SerchObj(string) override;
 	virtual void PrintObj() override;
 };
 

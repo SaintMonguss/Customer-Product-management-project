@@ -7,6 +7,7 @@
 int main()
 {
 	Manager* CM = new ClientManager;
-	CM->AddObj();
+	//CM->AddObj();
+	CM->PrintObj();
 	return 0;
 }

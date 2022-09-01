@@ -52,19 +52,32 @@ void ClientManager::AddObj()
 	}
 }
 
-void ClientManager::DelObj()
+void ClientManager::DelObj(int id)
 {
 	
 }
-void ClientManager::ModiObj()
+void ClientManager::ModiObj(int id)
 {
 
 }
-void ClientManager::SerchObj()
+void ClientManager::SerchObj(int id)
+{
+
+}
+void ClientManager::SerchObj(string name)
 {
 
 }
 void ClientManager::PrintObj()
 {
+	system("cls");
+	std::cout << "┌───────┬───────────┬───────────────────────────────────────────────────────────────────────┐" << std::endl;;
+	std::cout << "│   ID       이름             번호                 주소                   E-mail            │" << std::endl;;
+	std::cout << "├───────┴───────────┴───────────────────────────────────────────────────────────────────────┤" << std::endl;;
+	
+	/*for(auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	{
+			itr->second
+	}*/
 
 }
