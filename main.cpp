@@ -1,4 +1,4 @@
-#include "Client.h"
+#include "ProjectHeader.h"
 
 #include <iostream>
 #include <vector>
@@ -6,5 +6,7 @@
 
 int main()
 {
-	std::vector<Client> clientList;
+	Manager* CM = new ClientManager;
+	CM->AddObj();
+	return 0;
 }

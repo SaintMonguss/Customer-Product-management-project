@@ -27,6 +27,12 @@
     <ClInclude Include="Date.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -40,6 +46,15 @@
     </ClCompile>
     <ClCompile Include="Date.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Order.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectHeader.h">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

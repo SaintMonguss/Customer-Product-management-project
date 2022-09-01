@@ -8,7 +8,7 @@ using std::cout;
 using std::cin;
 using std::string;
 
-enum OrderState
+enum class OrderState
 {
 	orederd, // ÁÖ¹®µÊ
 	returned, // ¹İ·ÁµÊ
@@ -28,8 +28,8 @@ private:
 	
 
 public:
-	Order(const int id);
-	Order(int, Date, string, int, int, int, OrderState);
+	Order(const int );
+	Order(const int, Date, string, int, int, int, OrderState);
 
 	int GetOrederId() const;
 	int GetClientId() const;
