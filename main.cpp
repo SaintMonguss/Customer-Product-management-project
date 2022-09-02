@@ -11,8 +11,7 @@ int main()
 	CM->AddObj();
 	CM->AddObj();
 	CM->PrintObj();
-	CM->DelObj();
+	CM->ModiObj();
 	CM->PrintObj();
-
 	return 0;
 }

@@ -14,7 +14,7 @@ string Client::GetName() const
 	return m_name;
 }
 
-string Client::GetPhonNumber() const
+string Client::GetPhoneNumber() const
 {
 	return m_phoneNumber;
 }

@@ -39,7 +39,7 @@ void ClientManager::AddObj()
 	std::cin >> input;
 	client->SetPhoneNumber(input);
 	std::cout << "주소 : ";
-	cin.ignore(10, '\n'); // 버퍼에 남은 개행 삭제
+	cin.ignore(999, '\n'); //버퍼 청소
 	std::getline(std::cin, input, '\n'); //TODO: 32글자 까지 받을수 있게 제한 해야함
 	client->SetAdress(input);
 	std::cout << "E-mail : ";
@@ -78,7 +78,6 @@ void ClientManager::DelObj()
 	PrintObj(); // 고객 정보 출력 
 	std::cout << std::endl;
 	std::cout << "삭제할 고객의 ID를 입력 해주세요 : ";
-	cin.ignore(10,'\n'); //버퍼 청소
 	std::cin >> id;
 
 	try
@@ -106,46 +105,88 @@ void ClientManager::DelObj()
 	Sleep(1500);
 	system("cls");
 }
+
 void ClientManager::ModiObj()
 {
+	int id;
+	Client* client;
+	string tmp;
 
+	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
+	std::cout << "                                           고객 정보 수정                                   " << std::endl;
+	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
+	std::cout << std::endl;
+	std::cout << "수정할 고객의 ID를 입력 해주세요 : ";
+	std::cin >> id;
+	try
+	{
+		clientList.at(id);
+	}
+	catch (std::out_of_range e)
+	{
+		std::cout << "해당하는 ID는 존재하지 않습니다!!" << std::endl;
+		return;
+	}
+	client = clientList.find(id)->second; // 찾아서 클라이언트 객체를 할당
+	std::cout << "현재 이름 : [ " << client->GetName() << " ]" << std::endl;
+	std::cout << "수정할 이름 : ";
+	std::cin >> tmp;
+	client->SetName(tmp);
+	std::cout << "현재 번호 : [ " << client->GetPhoneNumber() << " ]" << std::endl;
+	std::cout << "수정할 번호 : ";
+	std::cin >> tmp;
+	client->SetPhoneNumber(tmp);
+	std::cout << "현재 주소 : [ " << client->GetAdress() << " ]" << std::endl;
+	std::cout << "수정할 주소 : ";
+	std::cin >> tmp;
+	client->SetAdress(tmp);
+	std::cout << "현재 E-mail : [ " << client->GetEmail() << " ]" << std::endl;
+	std::cout << "수정할 E-mail : ";
+	std::cin >> tmp;
+	client->SetEmail(tmp);
+	std::cout << std::endl;
+	std::cout << "고객 정보 수정 완료";
+	Sleep(1500);
+	system("cls");
 }
+
 void ClientManager::SerchObj()
 {
 	string name;
 	Client* client;
+	map<int, Client*> serchList;
 
 	system("cls");
 
-	// 출력 양식
-	std::cout << "┌───────┬───────────┬──────────────┬────────────────────────────────────────────────────────────────┬─────────────────────────┐" << std::endl;;
-	std::cout << "│   ID       이름          번호                                      주소                                       E-mail        │" << std::endl;;
-	// 출력 양식
 	std::cout << "검색할 대상의 이름을 입력해 주세요 : ";
 	cin.ignore(999, '\n'); //버퍼 청소
 	std::cin >> name;
-	system("cls");
-	//for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
-	//{
-	//	if (name == itr->second->GetName())
-	//	{
 
-	//	}
-
-	//}
-
-	// 이부분을 함수로 따로 만들어서 빼는게 맞다는 판단. 상속 인터페이스를 오버라이딩한 함수내에서 내부 함수를 다시 불러서 쓰는것은 문제 없음
+	for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	{
+		if (name == itr->second->GetName())
+			serchList[itr->first] = itr->second;
+	}
+	printClientForm(serchList);
+	std::cout << std::endl;
+	std::cout << name << " 검색 결과" << std::endl;
+	return;
+	
 }
 
 void ClientManager::PrintObj()
 {
-	Client* client;
 	system("cls");
+	printClientForm(clientList);
+	return;
+}
+
+void ClientManager::printClientForm(map<int, Client*> &clientList) const
+{
+	Client* client;
 	std::cout << "┌───────┬───────────┬──────────────┬────────────────────────────────────────────────────────────────┬─────────────────────────┐" << std::endl;;
 	std::cout << "│   ID       이름          번호                                      주소                                       E-mail        │" << std::endl;;
-	
-	
-	for(auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
 	{
 		client = itr->second;
 		std::cout << "├───────┼───────────┼──────────────┼────────────────────────────────────────────────────────────────┼─────────────────────────┤" << std::endl;;
@@ -164,7 +205,7 @@ void ClientManager::PrintObj()
 		///////////////////// 번호 칸 양식
 		std::cout << "  ";
 		std::cout.width(11);
-		std::cout << client->GetPhonNumber();
+		std::cout << client->GetPhoneNumber();
 		std::cout << "  ";
 		///////////////////// 주소 칸 양식
 		std::cout.width(63);
@@ -173,8 +214,9 @@ void ClientManager::PrintObj()
 		///////////////////// 이메일 칸 양식
 		std::cout.width(24);
 		std::cout << client->GetEmail();
-		std::cout << " │" <<std::endl;
+		std::cout << " │" << std::endl;
 	}
-
 	std::cout << "└───────┴───────────┴──────────────┴────────────────────────────────────────────────────────────────┴─────────────────────────┘" << std::endl;;
+	return;
 }
+

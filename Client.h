@@ -23,7 +23,7 @@ public:
 	Client(int ,string, string, string, string);
 
 	string GetName() const;
-	string GetPhonNumber() const;
+	string GetPhoneNumber() const;
 	string GetAdress() const;
 	string GetEmail() const;
 

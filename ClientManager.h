@@ -27,6 +27,7 @@ public:
 	virtual void ModiObj() override;
 	virtual void SerchObj() override;
 	virtual void PrintObj() override;
+	void printClientForm(map<int, Client*> &) const;
 };
 
 #endif
