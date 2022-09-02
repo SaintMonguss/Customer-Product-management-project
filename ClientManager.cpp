@@ -112,12 +112,34 @@ void ClientManager::ModiObj()
 }
 void ClientManager::SerchObj()
 {
+	string name;
+	Client* client;
+
 	system("cls");
-	
+
+	// 출력 양식
+	std::cout << "┌───────┬───────────┬──────────────┬────────────────────────────────────────────────────────────────┬─────────────────────────┐" << std::endl;;
+	std::cout << "│   ID       이름          번호                                      주소                                       E-mail        │" << std::endl;;
+	// 출력 양식
+	std::cout << "검색할 대상의 이름을 입력해 주세요 : ";
+	cin.ignore(999, '\n'); //버퍼 청소
+	std::cin >> name;
+	system("cls");
+	//for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	//{
+	//	if (name == itr->second->GetName())
+	//	{
+
+	//	}
+
+	//}
+
+	// 이부분을 함수로 따로 만들어서 빼는게 맞다는 판단. 상속 인터페이스를 오버라이딩한 함수내에서 내부 함수를 다시 불러서 쓰는것은 문제 없음
 }
 
 void ClientManager::PrintObj()
 {
+	Client* client;
 	system("cls");
 	std::cout << "┌───────┬───────────┬──────────────┬────────────────────────────────────────────────────────────────┬─────────────────────────┐" << std::endl;;
 	std::cout << "│   ID       이름          번호                                      주소                                       E-mail        │" << std::endl;;
@@ -125,7 +147,7 @@ void ClientManager::PrintObj()
 	
 	for(auto itr = clientList.begin(); itr != clientList.end(); itr++)
 	{
-		Client* client = itr->second;
+		client = itr->second;
 		std::cout << "├───────┼───────────┼──────────────┼────────────────────────────────────────────────────────────────┼─────────────────────────┤" << std::endl;;
 		std::cout << "│ ";
 		///////////////////// ID 칸 양식
