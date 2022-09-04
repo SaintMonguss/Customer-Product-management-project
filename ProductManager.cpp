@@ -68,7 +68,7 @@ void ClientManager::DelObj()
 {
 	int id;
 	char check;
-	Client *client;
+	Client* client;
 
 
 	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
@@ -90,7 +90,7 @@ void ClientManager::DelObj()
 		return;
 	}
 	client = clientList.find(id)->second; // 찾아서 클라이언트 객체를 할당
-	std::cout << client->GetName() << " 고객 정보를 삭제 하시겠습니까?"<<std::endl;
+	std::cout << client->GetName() << " 고객 정보를 삭제 하시겠습니까?" << std::endl;
 	do
 	{
 		cin.ignore(999, '\n'); //버퍼 청소
@@ -172,7 +172,7 @@ void ClientManager::SerchObj()
 	std::cout << std::endl;
 	std::cout << name << " 검색 결과" << std::endl;
 	return;
-	
+
 }
 
 void ClientManager::PrintObj()
@@ -182,7 +182,7 @@ void ClientManager::PrintObj()
 	return;
 }
 
-void ClientManager::printClientForm(map<int, Client*> &clientList) const
+void ClientManager::printClientForm(map<int, Client*>& clientList) const
 {
 	Client* client;
 	std::cout << "┌───────┬───────────┬──────────────┬────────────────────────────────────────────────────────────────┬─────────────────────────┐" << std::endl;;

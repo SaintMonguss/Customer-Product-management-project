@@ -145,6 +145,7 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Product.h" />
     <ClInclude Include="Order.h" />
+    <ClInclude Include="ProductManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="Date.cpp" />
+    <ClCompile Include="ProductManager.cpp" />
     <ClCompile Include="ProjectHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

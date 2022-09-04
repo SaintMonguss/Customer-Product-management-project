@@ -6,7 +6,7 @@
 
 int main()
 {
-	system("mode con:cols=130 lines=40");
+	system("mode con:cols=135 lines=40");
 	Manager* CM = new ClientManager;
 	CM->AddObj();
 	CM->AddObj();
