@@ -154,7 +154,6 @@ void ClientManager::ModiObj()
 void ClientManager::SerchObj()
 {
 	string name;
-	Client* client;
 	map<int, Client*> serchList;
 
 	system("cls");

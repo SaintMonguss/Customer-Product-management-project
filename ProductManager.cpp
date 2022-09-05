@@ -7,21 +7,22 @@
 #include <windows.h>
 
 
-ClientManager::ClientManager(map<int, Client*> CL) : clientList(CL) {};
+ProductManager::ProductManager(map<int, Product*> PL) : productList(PL) {};
 
 //°í°´ Á¤º¸ Ãß°¡
-void ClientManager::AddObj()
+void ProductManager::AddObj()
 {
 	string input;
-	Client* client;
+	Product* product;
 	int id;
-	if (clientList.empty())
+	int num;
+	if (productList.empty())
 		id = 1;
 	else
-		id = (clientList.rbegin()->first) + 1;
+		id = (productList.rbegin()->first) + 1;
 	try
 	{
-		client = new Client(id);
+		product = new Product(id);
 	}
 	catch (const std::bad_alloc& e)
 	{
@@ -29,68 +30,67 @@ void ClientManager::AddObj()
 		return;
 	}
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           ½Å±Ô °í°´ µî·Ï                                   " << std::endl;
+	std::cout << "                                           ½Å±Ô »óÇ° µî·Ï                                   " << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;;
-	std::cout << "ÀÌ¸§ : ";
+	std::cout << "Á¦Ç°¸í : ";
 	std::cin >> input;
-	client->SetName(input);
-	std::cout << "¿¬¶ôÃ³( - ¾øÀÌ ÀÔ·Â) : ";
+	product->SetName(input);
+	std::cout << "ºê·£µå : ";
 	std::cin >> input;
-	client->SetPhoneNumber(input);
-	std::cout << "ÁÖ¼Ò : ";
-	cin.ignore(999, '\n'); //¹öÆÛ Ã»¼Ò
-	std::getline(std::cin, input, '\n'); //TODO: 32±ÛÀÚ ±îÁö ¹ÞÀ»¼ö ÀÖ°Ô Á¦ÇÑ ÇØ¾ßÇÔ
-	client->SetAdress(input);
-	std::cout << "E-mail : ";
-	std::cin >> input;
-	client->SetEmail(input);
+	product->SetBrand(input);
+	std::cout << "°¡°Ý : ";
+	std::cin >> num;
+	product->SetPrice(num);
+	std::cout << "Àç°í : ";
+	std::cin >> num;
+	product->SetStock(num);
 	try
 	{
-		auto tmp = (clientList.insert({ id, client }));
+		auto tmp = (productList.insert({ id, product }));
 		if (tmp.second == false)
 			throw;
 	}
 	catch (...)
 	{
 		std::cout << std::endl;
-		std::cout << "Å° ID Áßº¹ ¹ß»ý, °í°´ Ãß°¡ ½ÇÆÐ" << std::endl;
+		std::cout << "Å° ID Áßº¹ ¹ß»ý, ½Å±Ô »óÇ° µî·Ï ½ÇÆÐ" << std::endl;
 		std::cout << std::endl;
 		return;
 	}
-	std::cout << "½Å±Ô °í°´ µî·Ï ¿Ï·á!";
+	std::cout << "½Å±Ô »óÇ° µî·Ï ¿Ï·á!";
 	Sleep(1500); //È­¸é Áö¿¬
 	system("cls");
 	return;
 }
 
-void ClientManager::DelObj()
+void ProductManager::DelObj()
 {
 	int id;
 	char check;
-	Client* client;
+	Product* product;
 
 
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           °í°´ Á¤º¸ »èÁ¦                                   " << std::endl;
+	std::cout << "                                           »óÇ° Á¤º¸ »èÁ¦                                   " << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;;
-	PrintObj(); // °í°´ Á¤º¸ Ãâ·Â 
+	PrintObj(); // »óÇ° Á¤º¸ Ãâ·Â 
 	std::cout << std::endl;
-	std::cout << "»èÁ¦ÇÒ °í°´ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
+	std::cout << "»èÁ¦ÇÒ »óÇ°ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
 	std::cin >> id;
 
 	try
 	{
-		clientList.at(id);
+		productList.at(id);
 	}
 	catch (std::out_of_range e)
 	{
 		std::cout << "ÇØ´çÇÏ´Â ID´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!!" << std::endl;
 		return;
 	}
-	client = clientList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
-	std::cout << client->GetName() << " °í°´ Á¤º¸¸¦ »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?" << std::endl;
+	product = productList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
+	std::cout << product->GetName() << " »óÇ° Á¤º¸¸¦ »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?" << std::endl;
 	do
 	{
 		cin.ignore(999, '\n'); //¹öÆÛ Ã»¼Ò
@@ -100,27 +100,28 @@ void ClientManager::DelObj()
 	} while ((check != 'Y') && (check != 'N'));
 	if (check == 'N')
 		return;
-	clientList.erase(id);
-	std::cout << client->GetName() << " °í°´ Á¤º¸¸¦ »èÁ¦Çß½À´Ï´Ù" << std::endl;
+	productList.erase(id);
+	std::cout << product->GetName() << " »óÇ° Á¤º¸¸¦ »èÁ¦Çß½À´Ï´Ù" << std::endl;
 	Sleep(1500);
 	system("cls");
 }
 
-void ClientManager::ModiObj()
+void ProductManager::ModiObj()
 {
 	int id;
-	Client* client;
+	Product* product;
 	string tmp;
+	int num;
 
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           °í°´ Á¤º¸ ¼öÁ¤                                   " << std::endl;
+	std::cout << "                                           »óÇ° Á¤º¸ ¼öÁ¤                                   " << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;
-	std::cout << "¼öÁ¤ÇÒ °í°´ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
+	std::cout << "¼öÁ¤ÇÒ »óÇ°ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
 	std::cin >> id;
 	try
 	{
-		clientList.at(id);
+		productList.at(id);
 	}
 	catch (std::out_of_range e)
 	{
@@ -128,68 +129,65 @@ void ClientManager::ModiObj()
 		Sleep(1000);
 		return;
 	}
-	client = clientList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
-	std::cout << "ÇöÀç ÀÌ¸§ : [ " << client->GetName() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ ÀÌ¸§ : ";
+	product = productList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
+	std::cout << "ÇöÀç Á¦Ç°¸í : [ " << product->GetName() << " ]" << std::endl;
+	std::cout << "¼öÁ¤ÇÒ Á¦Ç°¸í : ";
 	std::cin >> tmp;
-	client->SetName(tmp);
-	std::cout << "ÇöÀç ¹øÈ£ : [ " << client->GetPhoneNumber() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ ¹øÈ£ : ";
+	product->SetName(tmp);
+	std::cout << "ÇöÀç ºê·£µå : [ " << product->GetBrand() << " ]" << std::endl;
+	std::cout << "¼öÁ¤ÇÒ ºê·£µå : ";
 	std::cin >> tmp;
-	client->SetPhoneNumber(tmp);
-	std::cout << "ÇöÀç ÁÖ¼Ò : [ " << client->GetAdress() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ ÁÖ¼Ò : ";
-	std::cin >> tmp;
-	client->SetAdress(tmp);
-	std::cout << "ÇöÀç E-mail : [ " << client->GetEmail() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ E-mail : ";
-	std::cin >> tmp;
-	client->SetEmail(tmp);
+	product->SetBrand(tmp);
+	std::cout << "ÇöÀç °¡°Ý : [ " << product->GetPrice() << " ]" << std::endl;
+	std::cout << "¼öÁ¤ÇÒ °¡°Ý : ";
+	std::cin >> num;
+	product->SetPrice(num);
+	std::cout << "ÇöÀç Àç°í : [ " << product->GetStock() << " ]" << std::endl;
+	std::cout << "¼öÁ¤ÇÒ Àç°í : ";
+	std::cin >> num;
+	product->SetStock(num);
 	std::cout << std::endl;
-	std::cout << "°í°´ Á¤º¸ ¼öÁ¤ ¿Ï·á";
+	std::cout << "»óÇ° Á¤º¸ ¼öÁ¤ ¿Ï·á";
 	Sleep(1500);
 	system("cls");
 }
 
-void ClientManager::SerchObj()
+void ProductManager::SerchObj()
 {
 	string name;
-	Client* client;
-	map<int, Client*> serchList;
+	map<int, Product*> serchList;
 
 	system("cls");
 
-	std::cout << "°Ë»öÇÒ ´ë»óÀÇ ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ";
-	cin.ignore(999, '\n'); //¹öÆÛ Ã»¼Ò
+	std::cout << "°Ë»öÇÒ ´ë»óÀÇ Á¦Ç°¸íÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ";
 	std::cin >> name;
 
-	for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	for (auto itr = productList.begin(); itr != productList.end(); itr++)
 	{
 		if (name == itr->second->GetName())
 			serchList[itr->first] = itr->second;
 	}
-	printClientForm(serchList);
+	printProductForm(serchList);
 	std::cout << std::endl;
 	std::cout << name << " °Ë»ö °á°ú" << std::endl;
 	return;
-
 }
 
-void ClientManager::PrintObj()
+void ProductManager::PrintObj()
 {
 	system("cls");
-	printClientForm(clientList);
+	printProductForm(productList);
 	return;
 }
 
-void ClientManager::printClientForm(map<int, Client*>& clientList) const
+void ProductManager::printProductForm(map<int, Product*>& productList) const
 {
-	Client* client;
-	std::cout << "¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤" << std::endl;;
-	std::cout << "¦¢   ID       ÀÌ¸§          ¹øÈ£                                      ÁÖ¼Ò                                       E-mail        ¦¢" << std::endl;;
-	for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	Product* product;
+	std::cout <<	 "¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤" << std::endl;;
+	std::cout <<	 "¦¢   ID       Á¦Ç°¸í          ºê·£µå                                      °¡°Ý                                       Àç°í        ¦¢" << std::endl;;
+	for (auto itr = productList.begin(); itr != productList.end(); itr++)
 	{
-		client = itr->second;
+		product = itr->second;
 		std::cout << "¦§¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦©" << std::endl;;
 		std::cout << "¦¢ ";
 		///////////////////// ID Ä­ ¾ç½Ä
@@ -198,23 +196,23 @@ void ClientManager::printClientForm(map<int, Client*>& clientList) const
 		std::cout << itr->first;
 		cout.fill(' '); // °ø°£ Ã¤¿òÀ» °ø¹éÀ¸·Î ´Ù½Ã º¯°æ
 		std::cout << " ";
-		///////////////////// ÀÌ¸§ Ä­ ¾ç½Ä
+		///////////////////// Á¦Ç°¸í Ä­ ¾ç½Ä
 		std::cout << "  ";
 		std::cout.width(8);
-		std::cout << client->GetName();
+		std::cout << product->GetName();
 		std::cout << "  ";
-		///////////////////// ¹øÈ£ Ä­ ¾ç½Ä
+		///////////////////// ºê·£µå Ä­ ¾ç½Ä
 		std::cout << "  ";
 		std::cout.width(11);
-		std::cout << client->GetPhoneNumber();
+		std::cout << product->GetBrand();
 		std::cout << "  ";
-		///////////////////// ÁÖ¼Ò Ä­ ¾ç½Ä
+		///////////////////// °¡°Ý Ä­ ¾ç½Ä
 		std::cout.width(63);
-		std::cout << client->GetAdress();
+		std::cout << product->GetPrice();
 		std::cout << "  ";
-		///////////////////// ÀÌ¸ÞÀÏ Ä­ ¾ç½Ä
+		///////////////////// Àç°í Ä­ ¾ç½Ä
 		std::cout.width(24);
-		std::cout << client->GetEmail();
+		std::cout << product->GetStock();
 		std::cout << " ¦¢" << std::endl;
 	}
 	std::cout << "¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥" << std::endl;;
