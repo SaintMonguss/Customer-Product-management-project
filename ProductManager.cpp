@@ -40,10 +40,10 @@ void ProductManager::AddObj()
 	std::cin >> input;
 	product->SetBrand(input);
 	std::cout << "가격 : ";
-	std::cin >> num;
+	num = InputFormat::IntCin();
 	product->SetPrice(num);
 	std::cout << "재고 : ";
-	std::cin >> num;
+	num = InputFormat::IntCin();
 	product->SetStock(num);
 	try
 	{
@@ -79,7 +79,7 @@ void ProductManager::DelObj()
 	PrintObj(); // 상품 정보 출력 
 	std::cout << std::endl;
 	std::cout << "삭제할 상품의 ID를 입력 해주세요 : ";
-	std::cin >> id;
+	id = InputFormat::IntCin();
 
 	try
 	{
@@ -120,7 +120,7 @@ void ProductManager::ModiObj()
 	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
 	std::cout << std::endl;
 	std::cout << "수정할 상품의 ID를 입력 해주세요 : ";
-	std::cin >> id;
+	id = InputFormat::IntCin();
 	try
 	{
 		productList.at(id);
@@ -142,11 +142,11 @@ void ProductManager::ModiObj()
 	product->SetBrand(tmp);
 	std::cout << "현재 가격 : [ " << product->GetPrice() << " ]" << std::endl;
 	std::cout << "수정할 가격 : ";
-	std::cin >> num;
+	num = InputFormat::IntCin();
 	product->SetPrice(num);
 	std::cout << "현재 재고 : [ " << product->GetStock() << " ]" << std::endl;
 	std::cout << "수정할 재고 : ";
-	std::cin >> num;
+	num = InputFormat::IntCin();
 	product->SetStock(num);
 	std::cout << std::endl;
 	std::cout << "상품 정보 수정 완료";

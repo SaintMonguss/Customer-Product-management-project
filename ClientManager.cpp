@@ -83,7 +83,7 @@ void ClientManager::DelObj()
 	std::cout << std::endl; 
 	
 	std::cout << "삭제할 고객의 ID를 입력 해주세요 : ";
-	std::cin >> id;
+	id = InputFormat::IntCin();
 
 	try
 	{
@@ -122,8 +122,7 @@ void ClientManager::ModiObj()
 	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
 	std::cout << std::endl;
 	std::cout << "수정할 고객의 ID를 입력 해주세요 : ";
-	while (getchar() != '\n')
-	std::cin >> id;
+	id = InputFormat::IntCin();
 	try
 	{
 		clientList.at(id);

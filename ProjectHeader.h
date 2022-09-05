@@ -9,6 +9,7 @@
 #include "Product.h"
 #include "ProductManager.h"
 #include "PrintUI.h"
+#include "InputFormat.h"
 
 
 

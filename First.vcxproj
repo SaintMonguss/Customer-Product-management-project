@@ -142,6 +142,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientManager.h" />
     <ClInclude Include="Date.h" />
+    <ClInclude Include="InputFormat.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Product.h" />
     <ClInclude Include="Order.h" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ClientManager.cpp" />
+    <ClCompile Include="InputFormat.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="PrintUI.cpp" />

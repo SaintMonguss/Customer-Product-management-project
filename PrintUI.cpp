@@ -16,7 +16,7 @@ int PrintUI::PrintMainUI()
 	std::cout << "4. 종료" << std::endl;
 	std::cout << std::endl;
 	std::cout << "선택 : ";
-	std::cin >> choice;
+	choice = InputFormat::IntCin();
 	return choice;
 }
 
@@ -39,7 +39,7 @@ void PrintUI::PrintClientUI(Manager* CM)
 		std::cout << "6. 뒤로가기" << std::endl;
 		std::cout << "선택 : ";
 
-		std::cin >> choice;
+		choice = InputFormat::IntCin();
 		switch (choice)
 		{
 		case 1:
@@ -93,8 +93,8 @@ void PrintUI::PrintProductUI(Manager* PM)
 		std::cout << "5. 상품 정보 삭제" << std::endl;
 		std::cout << "6. 뒤로가기" << std::endl;
 		std::cout << "선택 : ";
-		std::cin >> choice;
-
+		choice = InputFormat::IntCin();
+		
 		switch (choice)
 		{
 		case 1:
