@@ -25,6 +25,7 @@ int Product::GetPrice() const
 	return m_price;
 }
 
+
 int Product::GetStock() const
 {
 	return m_stock;

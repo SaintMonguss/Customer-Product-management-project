@@ -9,7 +9,7 @@
 
 ProductManager::ProductManager(map<int, Product*> PL) : productList(PL) {};
 
-//고객 정보 추가
+//상품 정보 추가
 void ProductManager::AddObj()
 {
 	string input;
@@ -64,6 +64,7 @@ void ProductManager::AddObj()
 	return;
 }
 
+//상품 정보 삭제
 void ProductManager::DelObj()
 {
 	int id;
@@ -106,6 +107,7 @@ void ProductManager::DelObj()
 	system("cls");
 }
 
+//상품 정보 수정
 void ProductManager::ModiObj()
 {
 	int id;
@@ -152,6 +154,7 @@ void ProductManager::ModiObj()
 	system("cls");
 }
 
+//상품 정보 조회
 void ProductManager::SerchObj()
 {
 	string name;
@@ -167,6 +170,12 @@ void ProductManager::SerchObj()
 		if (name == itr->second->GetName())
 			serchList[itr->first] = itr->second;
 	}
+	if (serchList.empty())
+	{
+		std::cout << "[" << name << "]" << " 의 검색 결과가 없습니다...";
+		Sleep(1500);
+		return;
+	}
 	printProductForm(serchList);
 	std::cout << std::endl;
 	std::cout << name << " 검색 결과" << std::endl;
@@ -177,18 +186,22 @@ void ProductManager::PrintObj()
 {
 	system("cls");
 	printProductForm(productList);
+	std::cout << std::endl;
+	std::cout << "이전 화면으로 돌아가려면 enter를 입력해 주세요...";
+	while (getchar() != '\n');
+	getchar(); // 제어 흐름 정지
 	return;
 }
 
 void ProductManager::printProductForm(map<int, Product*>& productList) const
 {
 	Product* product;
-	std::cout <<	 "┌───────┬───────────┬──────────────┬────────────────────────────────────────────────────────────────┬─────────────────────────┐" << std::endl;;
-	std::cout <<	 "│   ID       제품명          브랜드                                      가격                                       재고        │" << std::endl;;
+	std::cout <<	 "┌───────┬─────────────────────────────────────────┬─────────────────────────────────────┬───────────────────┬─────────────────┐" << std::endl;;
+	std::cout <<	 "│   ID                     제품명                                   브랜드                       가격                재고     │" << std::endl;;
 	for (auto itr = productList.begin(); itr != productList.end(); itr++)
 	{
 		product = itr->second;
-		std::cout << "├───────┼───────────┼──────────────┼────────────────────────────────────────────────────────────────┼─────────────────────────┤" << std::endl;;
+		std::cout << "├───────┼─────────────────────────────────────────┼─────────────────────────────────────┼───────────────────┼─────────────────┤" << std::endl;;
 		std::cout << "│ ";
 		///////////////////// ID 칸 양식
 		cout.fill('0');
@@ -215,7 +228,7 @@ void ProductManager::printProductForm(map<int, Product*>& productList) const
 		std::cout << product->GetStock();
 		std::cout << " │" << std::endl;
 	}
-	std::cout << "└───────┴───────────┴──────────────┴────────────────────────────────────────────────────────────────┴─────────────────────────┘" << std::endl;;
+	std::cout << "└───────┴─────────────────────────────────────────┴─────────────────────────────────────┴───────────────────┴─────────────────┘" << std::endl;;
 	return;
 }
 

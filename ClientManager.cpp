@@ -15,6 +15,7 @@ void ClientManager::AddObj()
 	string input;
 	Client* client;
 	int id;
+
 	if (clientList.empty())
 		id = 1;
 	else
@@ -64,6 +65,7 @@ void ClientManager::AddObj()
 	return;
 }
 
+// 고객 정보 삭제
 void ClientManager::DelObj()
 {
 	int id;
@@ -75,8 +77,11 @@ void ClientManager::DelObj()
 	std::cout << "                                           고객 정보 삭제                                   " << std::endl;
 	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
 	std::cout << std::endl;;
-	PrintObj(); // 고객 정보 출력 
-	std::cout << std::endl;
+	// 고객정보 출력
+	system("cls");
+	printClientForm(clientList);
+	std::cout << std::endl; 
+	
 	std::cout << "삭제할 고객의 ID를 입력 해주세요 : ";
 	std::cin >> id;
 
@@ -101,11 +106,11 @@ void ClientManager::DelObj()
 	if (check == 'N')
 		return;
 	clientList.erase(id);
-	std::cout << client->GetName() << " 고객 정보를 삭제했습니다" << std::endl;
+	std::cout << "[" << client->GetName() << "]" << " 고객 정보를 삭제했습니다" << std::endl;
 	Sleep(1500);
 	system("cls");
 }
-
+// 고객 정보 수정
 void ClientManager::ModiObj()
 {
 	int id;
@@ -117,6 +122,7 @@ void ClientManager::ModiObj()
 	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
 	std::cout << std::endl;
 	std::cout << "수정할 고객의 ID를 입력 해주세요 : ";
+	while (getchar() != '\n')
 	std::cin >> id;
 	try
 	{
@@ -151,7 +157,8 @@ void ClientManager::ModiObj()
 	system("cls");
 }
 
-void ClientManager::SerchObj()
+// 고객 정보 검색
+void ClientManager::SerchObj() 
 {
 	string name;
 	map<int, Client*> serchList;
@@ -159,7 +166,6 @@ void ClientManager::SerchObj()
 	system("cls");
 
 	std::cout << "검색할 대상의 이름을 입력해 주세요 : ";
-	cin.ignore(999, '\n'); //버퍼 청소
 	std::cin >> name;
 
 	for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
@@ -167,20 +173,32 @@ void ClientManager::SerchObj()
 		if (name == itr->second->GetName())
 			serchList[itr->first] = itr->second;
 	}
+	if (serchList.empty())
+	{
+		std::cout << "[" << name << "]" << " 의 검색 결과가 없습니다...";
+		Sleep(1500);
+		return;
+	}
 	printClientForm(serchList);
 	std::cout << std::endl;
-	std::cout << name << " 검색 결과" << std::endl;
+	std::cout << "[" << name << "]" << " 검색 결과" << std::endl;
 	return;
 	
 }
 
+//고객 정보 조회
 void ClientManager::PrintObj()
 {
 	system("cls");
 	printClientForm(clientList);
+	std::cout << std::endl;
+	std::cout << "이전 화면으로 돌아가려면 enter를 입력해 주세요...";
+	while (getchar() != '\n');
+	getchar(); // 제어 흐름 정지
 	return;
 }
 
+// 고객 관련 출력 템플릿
 void ClientManager::printClientForm(map<int, Client*> &clientList) const
 {
 	Client* client;

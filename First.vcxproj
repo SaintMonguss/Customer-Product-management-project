@@ -146,12 +146,14 @@
     <ClInclude Include="Product.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="ProductManager.h" />
+    <ClInclude Include="PrintUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Order.cpp" />
+    <ClCompile Include="PrintUI.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="ProductManager.cpp" />
