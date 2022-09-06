@@ -24,6 +24,7 @@ private:
 
 public:
 	OrderManager(Manager*, Manager*);
+	~OrderManager();
 
 	std::vector<string> parseCSV(std::istream&, char);
 
