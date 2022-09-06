@@ -14,9 +14,9 @@ public:
 	Date() {};
 	Date(int, int, int);
 
-	void SetYear(int );
-	void SetMonth(int );
-	void SetDay(int );
+	bool SetYear(int );
+	bool SetMonth(int );
+	bool SetDay(int );
 
 	const int GetYear();
 	const int GetMonth();

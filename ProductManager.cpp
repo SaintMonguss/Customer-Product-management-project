@@ -30,7 +30,7 @@ void ProductManager::AddObj()
 		return;
 	}
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           ½Å±Ô »óÇ° µî·Ï                                   " << std::endl;
+	std::cout << "                                           ½Å±Ô »óÇ° µî·Ï" << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;;
 	std::cout << "Á¦Ç°¸í : ";
@@ -71,12 +71,13 @@ void ProductManager::DelObj()
 	char check;
 	Product* product;
 
-
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           »óÇ° Á¤º¸ »èÁ¦                                   " << std::endl;
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	system("cls");
+	printProductForm(productList);
 	std::cout << std::endl;;
-	PrintObj(); // »óÇ° Á¤º¸ Ãâ·Â 
+	std::cout << std::endl;;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "                                           »óÇ° Á¤º¸ »èÁ¦" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;
 	std::cout << "»èÁ¦ÇÒ »óÇ°ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
 	id = InputFormat::IntCin();
@@ -88,6 +89,7 @@ void ProductManager::DelObj()
 	catch (std::out_of_range e)
 	{
 		std::cout << "ÇØ´çÇÏ´Â ID´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!!" << std::endl;
+		Sleep(1000);
 		return;
 	}
 	product = productList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
@@ -102,7 +104,7 @@ void ProductManager::DelObj()
 	if (check == 'N')
 		return;
 	productList.erase(id);
-	std::cout << product->GetName() << " »óÇ° Á¤º¸¸¦ »èÁ¦Çß½À´Ï´Ù" << std::endl;
+	std::cout <<"[" << product->GetName() << "]" << " »óÇ° Á¤º¸¸¦ »èÁ¦Çß½À´Ï´Ù" << std::endl;
 	Sleep(1500);
 	system("cls");
 }
@@ -116,7 +118,7 @@ void ProductManager::ModiObj()
 	int num;
 
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           »óÇ° Á¤º¸ ¼öÁ¤                                   " << std::endl;
+	std::cout << "                                           »óÇ° Á¤º¸ ¼öÁ¤" << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;
 	std::cout << "¼öÁ¤ÇÒ »óÇ°ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
@@ -154,13 +156,18 @@ void ProductManager::ModiObj()
 	system("cls");
 }
 
-//»óÇ° Á¤º¸ Á¶È¸
+//»óÇ° Á¤º¸ °Ë»ö
 void ProductManager::SerchObj()
 {
 	string name;
 	map<int, Product*> serchList;
 
 	system("cls");
+
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "                                           »óÇ° Á¤º¸ °Ë»ö" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << std::endl;
 
 	std::cout << "°Ë»öÇÒ ´ë»óÀÇ Á¦Ç°¸íÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ";
 	std::cin >> name;
@@ -176,12 +183,18 @@ void ProductManager::SerchObj()
 		Sleep(1500);
 		return;
 	}
+	system("cls");
 	printProductForm(serchList);
 	std::cout << std::endl;
 	std::cout << name << " °Ë»ö °á°ú" << std::endl;
+	std::cout << std::endl;
+	std::cout << "ÀÌÀü È­¸éÀ¸·Î µ¹¾Æ°¡·Á¸é enter¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä...";
+	while (getchar() != '\n');
+	getchar(); // Á¦¾î Èå¸§ Á¤Áö
 	return;
 }
 
+// »óÇ° Á¤º¸ Á¶È¸
 void ProductManager::PrintObj()
 {
 	system("cls");
@@ -193,6 +206,23 @@ void ProductManager::PrintObj()
 	return;
 }
 
+
+void* ProductManager::TossObj(int id)
+{
+	Product* product = nullptr;
+	try
+	{
+		product = productList.at(id);
+	}
+	catch (std::out_of_range e)
+	{
+		std::cout << "ÇØ´çÇÏ´Â ID´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!!" << std::endl;
+		Sleep(1000);
+	}
+	return product;
+}
+
+//Ãâ·Â ¾ç½Ä
 void ProductManager::printProductForm(map<int, Product*>& productList) const
 {
 	Product* product;
@@ -205,26 +235,27 @@ void ProductManager::printProductForm(map<int, Product*>& productList) const
 		std::cout << "¦¢ ";
 		///////////////////// ID Ä­ ¾ç½Ä
 		cout.fill('0');
-		std::cout.width(6);
+		std::cout.width(P_ID_WIDTH);
 		std::cout << itr->first;
 		cout.fill(' '); // °ø°£ Ã¤¿òÀ» °ø¹éÀ¸·Î ´Ù½Ã º¯°æ
 		std::cout << " ";
 		///////////////////// Á¦Ç°¸í Ä­ ¾ç½Ä
 		std::cout << "  ";
-		std::cout.width(8);
+		std::cout.width(P_NAME_WIDTH);
 		std::cout << product->GetName();
 		std::cout << "  ";
 		///////////////////// ºê·£µå Ä­ ¾ç½Ä
 		std::cout << "  ";
-		std::cout.width(11);
+		std::cout.width(P_BRAND_WIDTH);
 		std::cout << product->GetBrand();
+
 		std::cout << "  ";
 		///////////////////// °¡°Ý Ä­ ¾ç½Ä
-		std::cout.width(63);
+		std::cout.width(P_PRICE_WIDTH);
 		std::cout << product->GetPrice();
 		std::cout << "  ";
 		///////////////////// Àç°í Ä­ ¾ç½Ä
-		std::cout.width(24);
+		std::cout.width(P_STOCK_WIDTH);
 		std::cout << product->GetStock();
 		std::cout << " ¦¢" << std::endl;
 	}

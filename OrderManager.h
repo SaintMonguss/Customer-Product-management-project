@@ -1,11 +1,11 @@
-#ifndef __PRODUCTMANAGER_H__
-#define __PRODUCTMANAGER_H__
+#ifndef __ORDERMANAGER_H__
+#define __ORDERTMANAGER_H__
 
 #include <iostream>
 #include <map>
 
 #include "Manager.h"
-#include "Product.h"
+#include "Order.h"
 
 
 using std::cout;
@@ -13,14 +13,16 @@ using std::cin;
 using std::string;
 using std::map;
 
-class ProductManager : public Manager
+class OrderManager : public Manager
 {
 private:
-	map<int, Product*> productList;
+	map<int, Order*> orderList;
+	Manager* CM;
+	Manager* PM;
 
 public:
-	ProductManager() {};
-	ProductManager(map<int, Product*>);
+	OrderManager() {};
+	OrderManager(Manager*, Manager*);
 
 	virtual void AddObj() override;
 	virtual void DelObj() override;
@@ -28,7 +30,7 @@ public:
 	virtual void SerchObj() override;
 	virtual void PrintObj() override;
 	virtual void* TossObj(int) override;
-	void printProductForm(map<int, Product*> &) const;
+	void printOrderForm(map<int, Order*> &) const;
 };
 
 #endif

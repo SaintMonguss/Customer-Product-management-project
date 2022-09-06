@@ -7,22 +7,26 @@
 #include <windows.h>
 
 
-ClientManager::ClientManager(map<int, Client*> CL) : clientList(CL) {};
+OrderManager::OrderManager(Manager* CM, Manager* PM) : CM(CM), PM(PM) {};
 
-//°í°´ Á¤º¸ Ãß°¡
-void ClientManager::AddObj()
+//ÁÖ¹® Á¤º¸ Ãß°¡
+void OrderManager::AddObj()
 {
 	string input;
-	Client* client;
+	Order* order;
+	Product *product;
+	Date date;
+	int num;
 	int id;
+	
 
-	if (clientList.empty())
+	if (orderList.empty())
 		id = 1;
 	else
-		id = (clientList.rbegin()->first) + 1;
+		id = (orderList.rbegin()->first) + 1;
 	try
 	{
-		client = new Client(id);
+		order = new Order(id);
 	}
 	catch (const std::bad_alloc& e)
 	{
@@ -30,71 +34,99 @@ void ClientManager::AddObj()
 		return;
 	}
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           ½Å±Ô °í°´ µî·Ï                                   " << std::endl;
+	std::cout << "                                           ½Å±Ô ÁÖ¹® µî·Ï" << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;;
-	std::cout << "ÀÌ¸§ : ";
-	std::cin >> input;
-	client->SetName(input);
-	std::cout << "¿¬¶ôÃ³( - ¾øÀÌ ÀÔ·Â) : ";
-	std::cin >> input;
-	client->SetPhoneNumber(input);
-	std::cout << "ÁÖ¼Ò : ";
-	cin.ignore(999, '\n'); //¹öÆÛ Ã»¼Ò
-	std::getline(std::cin, input, '\n'); //TODO: 32±ÛÀÚ ±îÁö ¹ÞÀ»¼ö ÀÖ°Ô Á¦ÇÑ ÇØ¾ßÇÔ
-	client->SetAdress(input);
-	std::cout << "E-mail : ";
-	std::cin >> input;
-	client->SetEmail(input);
+	std::cout << "µÚ·Î °¡°í ½Í´Ù¸é -1 ÀÔ·Â" << std::endl << std::endl;
+	do
+	{
+		std::cout << "»óÇ° ID : ";
+		num = InputFormat::IntCin();
+		if (num == -1)
+		{
+			return;
+		}
+	} while (!(PM->TossObj(num))); // ¿¹¿Ü Ã¼Å©
+	product = static_cast<Product*>(PM->TossObj(num));
+	input = product -> GetName(); //std::any¸¦ Product*·Î Ä³½ºÆÃÇÑµÚ ÀÌ¸§À» ¹Þ¾Æ¿Í¼­ input¿¡ ´ëÀÔ
+	order->SetProductName(input);
+	do
+	{
+		std::cout << "ÁÖ¹® ³¯ÀÚ [³â] (yyyy) : ";
+		num = InputFormat::IntCin();
+	} while (!date.SetYear(num));
+	do
+	{
+		std::cout << "ÁÖ¹® ³¯ÀÚ [¿ù] (mm): ";
+		num = InputFormat::IntCin();
+	} while (!date.SetMonth(num));
+	do
+	{
+		std::cout << "ÁÖ¹® ³¯ÀÚ [ÀÏ] (dd): ";
+		num = InputFormat::IntCin();
+	} while (!date.SetDay(num));
+	order->SetDate(date);
+
+	std::cout << "±¸¸ÅÀÚ ID : ";
+	num = InputFormat::IntCin();
+	order->SetClientId(num);
+	// ÁÖ¹® ¼ö·® ¼³Á¤
+	std::cout << "±¸¸Å ¼ö·® : ";
+	num = InputFormat::IntCin();
+	order->SetOrderStock(num);
+	// ÁÖ¹® °¡°Ý ¼³Á¤
+	order->SetOrderPrice(product->GetPrice());
+	
+
 	try
 	{
-		auto tmp = (clientList.insert({ id, client }));
+		auto tmp = (orderList.insert({ id, order }));
 		if (tmp.second == false)
 			throw;
 	}
 	catch (...)
 	{
 		std::cout << std::endl;
-		std::cout << "Å° ID Áßº¹ ¹ß»ý, °í°´ Ãß°¡ ½ÇÆÐ" << std::endl;
+		std::cout << "Å° ID Áßº¹ ¹ß»ý, ÁÖ¹® ÀÌ·Â Ãß°¡ ½ÇÆÐ" << std::endl;
 		std::cout << std::endl;
 		return;
 	}
-	std::cout << "½Å±Ô °í°´ µî·Ï ¿Ï·á!";
+	std::cout << "ÁÖ¹® ÀÌ·Â µî·Ï ¿Ï·á!";
 	Sleep(1500); //È­¸é Áö¿¬
 	system("cls");
 	return;
 }
 
-// °í°´ Á¤º¸ »èÁ¦
-void ClientManager::DelObj()
+// ÁÖ¹® Á¤º¸ »èÁ¦
+void OrderManager::DelObj()
 {
 	int id;
 	char check;
-	Client *client;
+	Order *order;
 
 	system("cls");
-	printClientForm(clientList);
+	printOrderForm(orderList);
 	std::cout << std::endl;;
 	std::cout << std::endl;;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           °í°´ Á¤º¸ »èÁ¦" << std::endl;
+	std::cout << "                                           ÁÖ¹® ÀÌ·Â »èÁ¦" << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl; 
-	std::cout << "»èÁ¦ÇÒ °í°´ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
+	std::cout << "»èÁ¦ÇÒ ÁÖ¹®ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
 	id = InputFormat::IntCin();
 
 	try
 	{
-		clientList.at(id);
+		orderList.at(id);
 	}
 	catch (std::out_of_range e)
 	{
-		std::cout << "ÇØ´çÇÏ´Â ID´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!!" << std::endl;
+		std::cout << "ÇØ´çÇÏ´Â ÁÖ¹® ID´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!!" << std::endl;
 		Sleep(1000);
 		return;
 	}
-	client = clientList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
-	std::cout << client->GetName() << " °í°´ Á¤º¸¸¦ »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?"<<std::endl;
+	order = orderList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
+	std::cout << "[" << order->GetOrderId() << "]" << " ¹ø ÁÖ¹® ÀÌ·ÂÀ» »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?" << std::endl;
 	do
 	{
 		cin.ignore(999, '\n'); //¹öÆÛ Ã»¼Ò
@@ -104,27 +136,31 @@ void ClientManager::DelObj()
 	} while ((check != 'Y') && (check != 'N'));
 	if (check == 'N')
 		return;
-	clientList.erase(id);
-	std::cout << "[" << client->GetName() << "]" << " °í°´ Á¤º¸¸¦ »èÁ¦Çß½À´Ï´Ù" << std::endl;
+	orderList.erase(id);
+	std::cout << "[" << order->GetOrderId() << "]" << " ¹ø ÁÖ¹® ÀÌ·ÂÀ» »èÁ¦Çß½À´Ï´Ù" << std::endl;
 	Sleep(1500);
 	system("cls");
 }
-// °í°´ Á¤º¸ ¼öÁ¤
-void ClientManager::ModiObj()
+// ÁÖ¹® ÀÌ·Â ¼öÁ¤
+void OrderManager::ModiObj()
 {
 	int id;
-	Client* client;
+	int num;
+	Date date;
+	Order* order;
 	string tmp;
 
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           °í°´ Á¤º¸ ¼öÁ¤" << std::endl;
+	std::cout << "                                           ÁÖ¹® ÀÌ·Â ¼öÁ¤" << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;
-	std::cout << "¼öÁ¤ÇÒ °í°´ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
+	std::cout << "¼öÁ¤ÇÒ ¼ö ÀÖ´Â Ç×¸ñÀº ÁÖ¹® ¼ö·®°ú ³¯Â¥ÀÔ´Ï´Ù.";
+	std::cout << std::endl;
+	std::cout << "¼öÁ¤ÇÒ ÁÖ¹®ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
 	id = InputFormat::IntCin();
 	try
 	{
-		clientList.at(id);
+		orderList.at(id);
 	}
 	catch (std::out_of_range e)
 	{
@@ -132,60 +168,69 @@ void ClientManager::ModiObj()
 		Sleep(1000);
 		return;
 	}
-	client = clientList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
-	std::cout << "ÇöÀç ÀÌ¸§ : [ " << client->GetName() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ ÀÌ¸§ : ";
-	std::cin >> tmp;
-	client->SetName(tmp);
-	std::cout << "ÇöÀç ¹øÈ£ : [ " << client->GetPhoneNumber() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ ¹øÈ£ : ";
-	std::cin >> tmp;
-	client->SetPhoneNumber(tmp);
-	std::cout << "ÇöÀç ÁÖ¼Ò : [ " << client->GetAdress() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ ÁÖ¼Ò : ";
-	std::cin >> tmp;
-	client->SetAdress(tmp);
-	std::cout << "ÇöÀç E-mail : [ " << client->GetEmail() << " ]" << std::endl;
-	std::cout << "¼öÁ¤ÇÒ E-mail : ";
-	std::cin >> tmp;
-	client->SetEmail(tmp);
-	std::cout << std::endl;
-	std::cout << "°í°´ Á¤º¸ ¼öÁ¤ ¿Ï·á";
+	order = orderList.find(id)->second; // Ã£¾Æ¼­ Å¬¶óÀÌ¾ðÆ® °´Ã¼¸¦ ÇÒ´ç
+	std::cout << "ÇöÀç ¼ö·® : [ " << order->GetOrderStock() << " ]" << std::endl;
+	std::cout << "¼öÁ¤ÇÒ ¼ö·® : ";
+	num = InputFormat::IntCin();
+	order->SetOrderStock(num);
+	std::cout << "ÇöÀç ³¯Â¥ : [ " 
+		<< order->GetDate().GetYear()<< "³â " 
+		<< order->GetDate().GetMonth() << "¿ù "
+		<< order->GetDate().GetDay() << "ÀÏ" 
+		<< "]" << std::endl;
+	do
+	{
+		std::cout << "¼öÁ¤ÇÒ ³¯ÀÚ [³â] (yyyy) : ";
+		num = InputFormat::IntCin();
+	} while (!date.SetYear(num));
+	do
+	{
+		std::cout << "ÁÖ¹® ³¯ÀÚ [¿ù] (mm): ";
+		num = InputFormat::IntCin();
+	} while (!date.SetMonth(num));
+	do
+	{
+		std::cout << "ÁÖ¹® ³¯ÀÚ [ÀÏ] (dd): ";
+		num = InputFormat::IntCin();
+	} while (!date.SetDay(num));
+	order->SetDate(date);
+
+	std::cout << "ÁÖ¹® Á¤º¸ ¼öÁ¤ ¿Ï·á";
 	Sleep(1500);
 	system("cls");
 }
 
-// °í°´ Á¤º¸ °Ë»ö
-void ClientManager::SerchObj() 
+// ÁÖ¹® Á¤º¸ °Ë»ö
+void OrderManager::SerchObj() 
 {
-	string name;
-	map<int, Client*> serchList;
+	int id;
+	map<int, Order*> serchList;
 
 	system("cls");
 
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           °í°´ Á¤º¸ °Ë»ö" << std::endl;
+	std::cout << "                                           ÁÖ¹® ÀÌ·Â °Ë»ö" << std::endl;
 	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "°Ë»öÇÒ ´ë»óÀÇ ÀÌ¸§À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ";
-	std::cin >> name;
+	std::cout << "°Ë»öÇÒ ÀÌ·ÂÀÇ ±¸¸ÅÀÚ ID¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ";
+	id = InputFormat::IntCin();
 
-	for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	for (auto itr = orderList.begin(); itr != orderList.end(); itr++)
 	{
-		if (name == itr->second->GetName())
+		if (id == itr->second->GetClientId())
 			serchList[itr->first] = itr->second;
 	}
 	if (serchList.empty())
 	{
-		std::cout << "[" << name << "]" << " ÀÇ °Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù...";
+		std::cout << "[" << id << "]" << " °í°´ÀÇ ÁÖ¹® ÀÌ·ÂÀÌ ¾ø½À´Ï´Ù...";
 		Sleep(1500);
 		return;
 	}
 	system("cls");
-	printClientForm(serchList);
+	printOrderForm(serchList);
 	std::cout << std::endl;
-	std::cout << "[" << name << "]" << " °Ë»ö °á°ú" << std::endl;
+	std::cout << "[" << id << "]" << " ÁÖ¹® ÀÌ·Â °Ë»ö °á°ú" << std::endl;
 	std::cout << std::endl;
 	std::cout << "ÀÌÀü È­¸éÀ¸·Î µ¹¾Æ°¡·Á¸é enter¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä...";
 	while (getchar() != '\n');
@@ -194,11 +239,11 @@ void ClientManager::SerchObj()
 	
 }
 
-//°í°´ Á¤º¸ Á¶È¸
-void ClientManager::PrintObj()
+//ÁÖ¹® Á¤º¸ Á¶È¸
+void OrderManager::PrintObj()
 {
 	system("cls");
-	printClientForm(clientList);
+	printOrderForm(orderList);
 	std::cout << std::endl;
 	std::cout << "ÀÌÀü È­¸éÀ¸·Î µ¹¾Æ°¡·Á¸é enter¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä...";
 	while (getchar() != '\n');
@@ -206,32 +251,31 @@ void ClientManager::PrintObj()
 	return;
 }
 
-//°í°´ ÇÑ¸íÀÇ Á¤º¸¸¦ ¸®ÅÏÇÏ´Â ÇÔ¼ö / ¹ÝÈ¯°ª any Çü
-void* ClientManager::TossObj(int id)
+void* OrderManager::TossObj(int id)
 {
-	Client* client =nullptr;
+	Order* order = nullptr;
 	try
 	{
-		client = clientList.at(id);
+		order = orderList.at(id);
 	}
 	catch (std::out_of_range e)
 	{
 		std::cout << "ÇØ´çÇÏ´Â ID´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù!!" << std::endl;
 		Sleep(1000);
 	}
-	
-	return client;
+	return order;
 }
 
+
 // °í°´ °ü·Ã Ãâ·Â ÅÛÇÃ¸´
-void ClientManager::printClientForm(map<int, Client*> &clientList) const
+void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 {
-	Client* client;
+	Order* order;
 	std::cout << "¦£¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¨¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¤" << std::endl;;
-	std::cout << "¦¢   ID       ÀÌ¸§          ¹øÈ£                                      ÁÖ¼Ò                                       E-mail        ¦¢" << std::endl;;
-	for (auto itr = clientList.begin(); itr != clientList.end(); itr++)
+	std::cout << "¦¢   ID       ³¯ÀÚ          ±¸¸ÅÀÚ id                                  »óÇ° ÀÌ¸§                  °¡°Ý               ¼ö·®        ¦¢" << std::endl;;
+	for (auto itr = orderList.begin(); itr != orderList.end(); itr++)
 	{
-		client = itr->second;
+		order = itr->second;
 		std::cout << "¦§¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦«¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦©" << std::endl;;
 		std::cout << "¦¢ ";
 		///////////////////// ID Ä­ ¾ç½Ä
@@ -240,23 +284,26 @@ void ClientManager::printClientForm(map<int, Client*> &clientList) const
 		std::cout << itr->first;
 		cout.fill(' '); // °ø°£ Ã¤¿òÀ» °ø¹éÀ¸·Î ´Ù½Ã º¯°æ
 		std::cout << " ";
-		///////////////////// ÀÌ¸§ Ä­ ¾ç½Ä
+		///////////////////// ³¯Â¥ ¾ç½Ä
 		std::cout << "  ";
 		std::cout.width(C_NAME_WIDTH);
-		std::cout << client->GetName();
+		std::cout
+			<< order->GetDate().GetYear() << "³â "
+			<< order->GetDate().GetMonth() << "¿ù "
+			<< order->GetDate().GetDay() << "ÀÏ";
 		std::cout << "  ";
-		///////////////////// ¹øÈ£ Ä­ ¾ç½Ä
+		///////////////////// Á¦Ç° ¸í ¾ç½Ä
 		std::cout << "  ";
 		std::cout.width(C_PHONNUMBER_WIDTH);
-		std::cout << client->GetPhoneNumber();
+		std::cout << order->GetProductName();
 		std::cout << "  ";
-		///////////////////// ÁÖ¼Ò Ä­ ¾ç½Ä
+		///////////////////// °¡°Ý ¾ç½Ä
 		std::cout.width(C_ADRESS_WIDTH);
-		std::cout << client->GetAdress();
+		std::cout << order->GetOrderPrice();
 		std::cout << "  ";
-		///////////////////// ÀÌ¸ÞÀÏ Ä­ ¾ç½Ä
+		///////////////////// ¼ö·® ¾ç½Ä
 		std::cout.width(C_EMAIL_WIDTH);
-		std::cout << client->GetEmail();
+		std::cout << order->GetOrderStock();
 		std::cout << " ¦¢" << std::endl;
 	}
 	std::cout << "¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥" << std::endl;;

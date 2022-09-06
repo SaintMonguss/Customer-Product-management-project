@@ -2,7 +2,9 @@
 #define __MANAGER_H__
 
 #include <iostream>
+#include <any>
 
+//매니저 클래스들의 슈퍼 클래스
 class Manager
 {
 public:
@@ -11,6 +13,7 @@ public:
 	virtual void ModiObj() = 0;
 	virtual void SerchObj() = 0;
 	virtual void PrintObj() = 0;
+	virtual void* TossObj(int) = 0;
 	
 };
 

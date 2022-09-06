@@ -5,18 +5,47 @@
 
 Date::Date(int year, int month, int day) : year(year), month(month), day(day) {};
 
-void Date::SetYear(int yaer)
+bool Date::SetYear(int yaer)
 {
-	this->year = year;
+	if (year >= 1980)
+	{
+		this->year = year;
+		return true;
+	}
+	else
+	{
+		std::cout << "잘못된 년도 값 입니다" << std::endl;
+		return false;
+	}
+
 }
 
-void Date::SetMonth(int month)
+bool Date::SetMonth(int month)
 {
-	this->month = month;
+	if (month >= 1 && month <= 12)
+	{
+		this->month = month;
+		return true;
+	}
+	else
+	{
+		std::cout << "잘못된 월 입니다." << std::endl;
+		return false;
+	}
+	
 }
-void Date::SetDay(int day)
+bool Date::SetDay(int day)
 {
-	this->day = day;
+	if (day >= 1 && day <= 31)
+	{
+		this->day = day;
+		return true;
+	}
+	else
+	{
+		std::cout << "잘못된 날자 입니다." << std::endl;
+		return false;
+	}
 }
 
 int const Date::GetYear()

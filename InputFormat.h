@@ -9,7 +9,7 @@ using std::cout;
 using std::cin;
 using std::string;
 
-
+// 인트형 변수를 받기 위한 함수 정의
 class InputFormat
 {
 

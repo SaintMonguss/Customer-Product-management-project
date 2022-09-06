@@ -42,6 +42,12 @@
     <ClInclude Include="InputFormat.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="DefineMacro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -72,6 +78,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="InputFormat.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="OrderManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

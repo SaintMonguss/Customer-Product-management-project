@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 
+
 #include "Manager.h"
 #include "Client.h"
 
@@ -27,6 +28,7 @@ public:
 	virtual void ModiObj() override;
 	virtual void SerchObj() override;
 	virtual void PrintObj() override;
+	virtual void* TossObj(int) override;
 	void printClientForm(map<int, Client*> &) const;
 };
 

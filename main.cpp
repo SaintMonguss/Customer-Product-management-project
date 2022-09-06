@@ -9,6 +9,7 @@ int main()
 	system("mode con:cols=135 lines=40");
 	Manager* CM = new ClientManager;
 	Manager* PM = new ProductManager;
+	Manager* OM = new OrderManager(CM, PM);
 	int choice = 0;
 
 	do
@@ -23,7 +24,7 @@ int main()
 			PrintUI::PrintProductUI(PM);
 			break;
 		case 3:
-			//PrintUI::PrintOrderUI();
+			PrintUI::PrintOrderUI(OM);
 			break;
 		case 4: // 종료
 			break;
@@ -31,8 +32,6 @@ int main()
 			std::cout << "잘못된 명령입니다" << std::endl;
 			break;
 		}
-
-
 
 	} while (choice != 4);
 	
