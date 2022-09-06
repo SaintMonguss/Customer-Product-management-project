@@ -6,8 +6,42 @@
 #include <stdio.h>
 #include <windows.h>
 
+ProductManager::ProductManager()
+{
+	std::ifstream file;
+	file.open("productlist.txt");
+	if (!file.fail()) {
+		while (!file.eof()) {
+			std::vector<string> row = parseCSV(file, ',');
+			if (row.size()) {
+				int id = atoi(row[0].c_str());
+				int price = atoi(row[3].c_str());
+				int stock = atoi(row[4].c_str());
+				Product* c = new Product(id, row[1], row[2], price, stock);
+				productList.insert({ id, c });
 
-ProductManager::ProductManager(map<int, Product*> PL) : productList(PL) {};
+			}
+		}
+	}
+	file.close();
+}
+
+ProductManager::~ProductManager()
+{
+	std::ofstream file;
+	file.open("clientlist.txt");
+	if (!file.fail()) {
+		for (const auto& v : productList) {
+			Product* c = v.second;
+			file << c->GetId() << ", " << c->GetName() << ", ";
+			file << c->GetBrand() << ", ";
+			file << c->GetPrice() << ", ";
+			file << c->GetStock() << std::endl;
+		}
+	}
+	file.close();
+}
+
 
 //상품 정보 추가
 void ProductManager::AddObj()
@@ -263,3 +297,26 @@ void ProductManager::printProductForm(map<int, Product*>& productList) const
 	return;
 }
 
+std::vector<string> ProductManager::parseCSV(std::istream& file, char delimiter)
+{
+	std::stringstream ss;
+	std::vector<string> row;
+	string t = " \n\r\t";
+
+	while (!file.eof()) {
+		char c = file.get();
+		if (c == delimiter || c == '\r' || c == '\n') {
+			if (file.peek() == '\n') file.get();
+			string s = ss.str();
+			s.erase(0, s.find_first_not_of(t));
+			s.erase(s.find_last_not_of(t) + 1);
+			row.push_back(s);
+			ss.str("");
+			if (c != delimiter) break;
+		}
+		else {
+			ss << c;
+		}
+	}
+	return row;
+}

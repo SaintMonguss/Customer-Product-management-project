@@ -155,7 +155,7 @@ void OrderManager::ModiObj()
 	std::cout << "────────────────────────────────────────────────────────────────────────────────────────────" << std::endl;
 	std::cout << std::endl;
 	std::cout << "수정할 수 있는 항목은 주문 수량과 날짜입니다.";
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 	std::cout << "수정할 주문의 ID를 입력 해주세요 : ";
 	id = InputFormat::IntCin();
 	try

@@ -6,8 +6,41 @@
 #include <stdio.h>
 #include <windows.h>
 
+ClientManager::ClientManager()
+{
+//	std::vector<Client*> vecList;
+	std::ifstream file;
+	file.open("clientlist.txt");
+		if (!file.fail()) {
+		while (!file.eof()) {
+			std::vector<string> row = parseCSV(file, ',');
+			if (row.size()) {
+				int id = atoi(row[0].c_str());
+				Client* c = new Client(id, row[1], row[2], row[3], row[4]);
+				clientList.insert({ id, c });
+//				vecList.push_back(c);
+			}
+		}
+	}
+	file.close();
+}
 
-ClientManager::ClientManager(map<int, Client*> CL) : clientList(CL) {};
+ClientManager::~ClientManager()
+{
+	std::ofstream file;
+	file.open("clientlist.txt");
+	if (!file.fail()) {
+		for (const auto& v : clientList) {
+			Client* c = v.second;
+			file << c->GetId() << ", " << c->GetName() << ", ";
+			file << c->GetPhoneNumber() << ", ";
+			file << c->GetAddress() << ", ";
+			file << c->GetEmail() << std::endl;
+		}
+	}
+	file.close();
+}
+
 
 //고객 정보 추가
 void ClientManager::AddObj()
@@ -42,7 +75,7 @@ void ClientManager::AddObj()
 	std::cout << "주소 : ";
 	cin.ignore(999, '\n'); //버퍼 청소
 	std::getline(std::cin, input, '\n'); //TODO: 32글자 까지 받을수 있게 제한 해야함
-	client->SetAdress(input);
+	client->SetAddress(input);
 	std::cout << "E-mail : ";
 	std::cin >> input;
 	client->SetEmail(input);
@@ -141,10 +174,10 @@ void ClientManager::ModiObj()
 	std::cout << "수정할 번호 : ";
 	std::cin >> tmp;
 	client->SetPhoneNumber(tmp);
-	std::cout << "현재 주소 : [ " << client->GetAdress() << " ]" << std::endl;
+	std::cout << "현재 주소 : [ " << client->GetAddress() << " ]" << std::endl;
 	std::cout << "수정할 주소 : ";
 	std::cin >> tmp;
-	client->SetAdress(tmp);
+	client->SetAddress(tmp);
 	std::cout << "현재 E-mail : [ " << client->GetEmail() << " ]" << std::endl;
 	std::cout << "수정할 E-mail : ";
 	std::cin >> tmp;
@@ -252,7 +285,7 @@ void ClientManager::printClientForm(map<int, Client*> &clientList) const
 		std::cout << "  ";
 		///////////////////// 주소 칸 양식
 		std::cout.width(C_ADRESS_WIDTH);
-		std::cout << client->GetAdress();
+		std::cout << client->GetAddress();
 		std::cout << "  ";
 		///////////////////// 이메일 칸 양식
 		std::cout.width(C_EMAIL_WIDTH);
@@ -263,3 +296,26 @@ void ClientManager::printClientForm(map<int, Client*> &clientList) const
 	return;
 }
 
+std::vector<string> ClientManager::parseCSV(std::istream& file, char delimiter)
+{
+	std::stringstream ss;
+	std::vector<string> row;
+	string t = " \n\r\t";
+
+	while (!file.eof()) {
+		char c = file.get();
+		if (c == delimiter || c == '\r' || c == '\n') {
+			if (file.peek() == '\n') file.get();
+			string s = ss.str();
+			s.erase(0, s.find_first_not_of(t));
+			s.erase(s.find_last_not_of(t) + 1);
+			row.push_back(s);
+			ss.str("");
+			if (c != delimiter) break;
+		}
+		else {
+			ss << c;
+		}
+	}
+	return row;
+}

@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <map>
-
+#include <vector>
+#include <fstream>
+#include <sstream>
 
 #include "Manager.h"
 #include "Client.h"
@@ -20,9 +22,11 @@ private:
 	map<int, Client*> clientList;
 
 public:
-	ClientManager() {};
-	ClientManager(map<int, Client*>);
+	ClientManager();
+	~ClientManager();
 
+    std::vector<string> parseCSV(std::istream& , char);
+  
 	virtual void AddObj() override;
 	virtual void DelObj() override;
 	virtual void ModiObj() override;

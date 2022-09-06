@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <map>
+#include <fstream>
+#include <sstream>
 
 #include "Manager.h"
 #include "Product.h"
@@ -19,8 +21,10 @@ private:
 	map<int, Product*> productList;
 
 public:
-	ProductManager() {};
-	ProductManager(map<int, Product*>);
+	ProductManager();
+	~ProductManager();
+
+	std::vector<string> parseCSV(std::istream& , char);
 
 	virtual void AddObj() override;
 	virtual void DelObj() override;
@@ -29,6 +33,7 @@ public:
 	virtual void PrintObj() override;
 	virtual void* TossObj(int) override;
 	void printProductForm(map<int, Product*> &) const;
+
 };
 
 #endif

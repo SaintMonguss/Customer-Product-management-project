@@ -36,7 +36,9 @@ int main()
 	} while (choice != 4);
 	
 	
-
+	delete CM;
+	delete PM;
+	delete OM;
 	return 0;
 }
 

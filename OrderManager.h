@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <map>
+#include <fstream>
+#include <sstream>
 
 #include "Manager.h"
 #include "Order.h"

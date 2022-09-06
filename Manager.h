@@ -8,6 +8,7 @@
 class Manager
 {
 public:
+	
 	virtual void AddObj() = 0;
 	virtual void DelObj() = 0;
 	virtual void ModiObj() = 0;
@@ -15,6 +16,7 @@ public:
 	virtual void PrintObj() = 0;
 	virtual void* TossObj(int) = 0;
 	
+	virtual ~Manager() {};
 };
 
 

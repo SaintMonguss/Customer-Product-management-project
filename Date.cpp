@@ -5,7 +5,7 @@
 
 Date::Date(int year, int month, int day) : year(year), month(month), day(day) {};
 
-bool Date::SetYear(int yaer)
+bool Date::SetYear(int year)
 {
 	if (year >= 1980)
 	{
