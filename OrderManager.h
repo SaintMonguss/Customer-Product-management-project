@@ -23,8 +23,9 @@ private:
 	Manager* PM;
 
 public:
-	OrderManager() {};
 	OrderManager(Manager*, Manager*);
+
+	std::vector<string> parseCSV(std::istream&, char);
 
 	virtual void AddObj() override;
 	virtual void DelObj() override;

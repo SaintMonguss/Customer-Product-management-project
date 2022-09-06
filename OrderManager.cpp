@@ -6,8 +6,56 @@
 #include <stdio.h>
 #include <windows.h>
 
+// 생성자 파일 불러오기
+OrderManager::OrderManager(Manager* CM, Manager* PM) : CM(CM), PM(PM) 
+{
+	//	std::vector<Client*> vecList;
+	std::ifstream file;
+	file.open("orderlist.txt");
+	if (!file.fail()) {
+		while (!file.eof()) {
+			std::vector<string> row = parseCSV(file, ',');
+			if (row.size()) {
+				int id = atoi(row[0].c_str());
+				Date date;
+				date.SetYear(atoi(row[1].c_str()));
+				date.SetMonth(atoi(row[2].c_str()));
+				date.SetDay(atoi(row[3].c_str()));
+				int clientId = atoi(row[5].c_str());
+				int price = atoi(row[6].c_str());
+				int stock = atoi(row[7].c_str());
+				Order* c = new Order(id, date, row[4], clientId, price, stock);
+				orderList.insert({ id, c });
+				//				vecList.push_back(c);
+			}
+		}
+	}
+	file.close();
+};
 
-OrderManager::OrderManager(Manager* CM, Manager* PM) : CM(CM), PM(PM) {};
+//소멸자 파일 저장
+OrderManager::~OrderManager()
+{
+	std::ofstream file;
+	file.open("orderlist.txt");
+	if (!file.fail()) {
+		for (const auto& v : orderList) {
+			Order* c = v.second;
+			file << c->GetOrderId() << ", ";
+			file << c->GetDate().GetYear() << ", ";
+			file << c->GetDate().GetMonth() << ", ";
+			file << c->GetDate().GetDay() << ", ";
+			file << c->GetProductName() << ", ";
+			file << c->GetClientId() << ", ";
+			file << c->GetOrderPrice() << ", ";
+			file << c->GetOrderStock() << std::endl;
+			
+		}
+	}
+	file.close();
+}
+
+
 
 //주문 정보 추가
 void OrderManager::AddObj()
@@ -310,3 +358,26 @@ void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 	return;
 }
 
+std::vector<string> OrderManager::parseCSV(std::istream& file, char delimiter)
+{
+	std::stringstream ss;
+	std::vector<string> row;
+	string t = " \n\r\t";
+
+	while (!file.eof()) {
+		char c = file.get();
+		if (c == delimiter || c == '\r' || c == '\n') {
+			if (file.peek() == '\n') file.get();
+			string s = ss.str();
+			s.erase(0, s.find_first_not_of(t));
+			s.erase(s.find_last_not_of(t) + 1);
+			row.push_back(s);
+			ss.str("");
+			if (c != delimiter) break;
+		}
+		else {
+			ss << c;
+		}
+	}
+	return row;
+}

@@ -29,11 +29,12 @@ ProductManager::ProductManager()
 ProductManager::~ProductManager()
 {
 	std::ofstream file;
-	file.open("clientlist.txt");
+	file.open("productlist.txt");
 	if (!file.fail()) {
 		for (const auto& v : productList) {
 			Product* c = v.second;
-			file << c->GetId() << ", " << c->GetName() << ", ";
+			file << c->GetId() << ", ";
+			file << c->GetName() << ", ";
 			file << c->GetBrand() << ", ";
 			file << c->GetPrice() << ", ";
 			file << c->GetStock() << std::endl;

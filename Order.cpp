@@ -7,6 +7,7 @@ Order::Order(const int id, Date date, string productName, int clientId, int orde
 	m_orderId(id), m_date(date), m_productName(productName), m_clientId(clientId),
 	m_orderPrice(orderPrice), m_orderStock(orderStock) {}
 
+
 int Order::GetOrderId() const
 {
 	return m_orderId;

@@ -32,7 +32,8 @@ ClientManager::~ClientManager()
 	if (!file.fail()) {
 		for (const auto& v : clientList) {
 			Client* c = v.second;
-			file << c->GetId() << ", " << c->GetName() << ", ";
+			file << c->GetId() << ", ";
+			file << c->GetName() << ", ";
 			file << c->GetPhoneNumber() << ", ";
 			file << c->GetAddress() << ", ";
 			file << c->GetEmail() << std::endl;
