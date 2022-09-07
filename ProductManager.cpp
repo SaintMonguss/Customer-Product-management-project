@@ -71,14 +71,14 @@ void ProductManager::AddObj()
 	std::cout << "뒤로 가고 싶다면 -1 입력" << std::endl << std::endl;
 	std::cout << "제품명 : ";
 	std::cin.clear();
-	cin.ignore(999, '\n'); //버퍼 청소 필요
-	std::getline(std::cin, input, '\n');  // 한줄 전체를 받아야 함으로 getline() 사용
-	if (static_cast<int>(atoi(input.c_str())) == -1) // getline
+	cin.ignore(999, '\n');								//버퍼 청소 필요
+	std::getline(std::cin, input, '\n');				// 한줄 전체를 받아야 함으로 getline() 사용
+	if (static_cast<int>(atoi(input.c_str())) == -1)	// getline
 		return;
 	product->SetName(input);
 	std::cout << "브랜드 : ";
-	std::cin.clear(); // 위에가 getline 이므로 버퍼 청소 불필요
-	std::getline(std::cin, input, '\n');  // 한줄 전체를 받아야 함으로 getline() 사용
+	std::cin.clear();									// 위에가 getline 이므로 버퍼 청소 불필요
+	std::getline(std::cin, input, '\n');				// 한줄 전체를 받아야 함으로 getline() 사용
 	product->SetBrand(input);
 	std::cout << "가격 : ";
 	num = InputFormat::IntCin();
@@ -100,7 +100,7 @@ void ProductManager::AddObj()
 		return;
 	}
 	std::cout << "신규 상품 등록 완료!";
-	Sleep(1500); //화면 지연
+	Sleep(1500);										//화면 지연
 	system("cls");
 	return;
 }
@@ -135,14 +135,14 @@ void ProductManager::DelObj()
 		Sleep(1000);
 		return;
 	}
-	product = productList.find(id)->second; // 찾아서 클라이언트 객체를 할당
+	product = productList.find(id)->second;				// 찾아서 클라이언트 객체를 할당
 	std::cout << product->GetName() << " 상품 정보를 삭제 하시겠습니까?" << std::endl;
 	do
 	{
-		cin.ignore(999, '\n'); //버퍼 청소
+		cin.ignore(999, '\n');							//버퍼 청소
 		std::cout << "[ Y / N ] : ";
 		std::cin >> check;
-		check = toupper(check); // 대문자 전환
+		check = toupper(check);							// 대문자 전환
 	} while ((check != 'Y') && (check != 'N'));
 	if (check == 'N')
 		return;
@@ -179,17 +179,17 @@ void ProductManager::ModiObj()
 		Sleep(1000);
 		return;
 	}
-	product = productList.find(id)->second; // 찾아서 클라이언트 객체를 할당
+	product = productList.find(id)->second;				// 찾아서 클라이언트 객체를 할당
 	std::cout << "현재 제품명 : [ " << product->GetName() << " ]" << std::endl;
 	std::cout << "수정할 제품명 : ";
 	std::cin.clear();
-	cin.ignore(999, '\n'); //버퍼 청소 필요
-	std::getline(std::cin, tmp, '\n');  // 한줄 전체를 받아야 함으로 getline() 사용
+	cin.ignore(999, '\n');								//버퍼 청소 필요
+	std::getline(std::cin, tmp, '\n');					// 한줄 전체를 받아야 함으로 getline() 사용
 	product->SetName(tmp);
 	std::cout << "현재 브랜드 : [ " << product->GetBrand() << " ]" << std::endl;
 	std::cout << "수정할 브랜드 : ";
 	std::cin.clear();
-	std::getline(std::cin, tmp, '\n');  // 한줄 전체를 받아야 함으로 getline() 사용
+	std::getline(std::cin, tmp, '\n');					// 한줄 전체를 받아야 함으로 getline() 사용
 	product->SetBrand(tmp);
 	std::cout << "현재 가격 : [ " << product->GetPrice() << " ]" << std::endl;
 	std::cout << "수정할 가격 : ";
@@ -220,8 +220,8 @@ void ProductManager::SerchObj()
 
 	std::cout << "검색할 대상의 제품명을 입력해 주세요 : ";
 	std::cin.clear();
-	cin.ignore(999, '\n'); //버퍼 청소 필요
-	std::getline(std::cin, name, '\n');  // 한줄 전체를 받아야 함으로 getline() 사용
+	cin.ignore(999, '\n');								//버퍼 청소 필요
+	std::getline(std::cin, name, '\n');					// 한줄 전체를 받아야 함으로 getline() 사용
 
 	for (auto itr = productList.begin(); itr != productList.end(); itr++)
 	{
@@ -252,7 +252,7 @@ void ProductManager::PrintObj()
 	std::cout << std::endl;
 	std::cout << "이전 화면으로 돌아가려면 enter를 입력해 주세요...";
 	while (getchar() != '\n');
-	getchar(); // 제어 흐름 정지
+	getchar();											// 제어 흐름 정지
 	return;
 }
 
@@ -287,7 +287,7 @@ void ProductManager::printProductForm(map<int, Product*>& productList) const
 		cout.fill('0');
 		std::cout.width(P_ID_WIDTH);
 		std::cout << itr->first;
-		cout.fill(' '); // 공간 채움을 공백으로 다시 변경
+		cout.fill(' ');						// 공간 채움을 공백으로 다시 변경
 		std::cout << " ";
 		///////////////////// 제품명 칸 양식
 		std::cout << "  ";

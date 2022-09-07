@@ -9,7 +9,6 @@
 //파일 불러오기
 ClientManager::ClientManager()
 {
-//	std::vector<Client*> vecList;
 	std::ifstream file;
 	file.open("clientlist.txt");
 		if (!file.fail()) {
@@ -19,7 +18,6 @@ ClientManager::ClientManager()
 				int id = atoi(row[0].c_str());
 				Client* c = new Client(id, row[1], row[2], row[3], row[4]);
 				clientList.insert({ id, c });
-//				vecList.push_back(c);
 			}
 		}
 	}
@@ -79,8 +77,8 @@ void ClientManager::AddObj()
 	std::cin >> input;
 	client->SetPhoneNumber(input);
 	std::cout << "주소 : ";
-	cin.ignore(999, '\n'); //버퍼 청소
-	std::getline(std::cin, input, '\n');  // 한줄 전체를 받아야 함으로 getline() 사용
+	cin.ignore(999, '\n');						//버퍼 청소
+	std::getline(std::cin, input, '\n');		// 한줄 전체를 받아야 함으로 getline() 사용
 	client->SetAddress(input);
 	std::cout << "E-mail : ";
 	std::cin >> input;
@@ -99,7 +97,7 @@ void ClientManager::AddObj()
 		return;
 	}
 	std::cout << "신규 고객 등록 완료!";
-	Sleep(1500); //화면 지연
+	Sleep(1500);								//화면 지연
 	system("cls");
 	return;
 }
@@ -134,14 +132,14 @@ void ClientManager::DelObj()
 		Sleep(1000);
 		return;
 	}
-	client = clientList.find(id)->second; // 찾아서 클라이언트 객체를 할당
+	client = clientList.find(id)->second;			// 찾아서 클라이언트 객체를 할당
 	std::cout << client->GetName() << " 고객 정보를 삭제 하시겠습니까?"<<std::endl;
 	do
 	{
-		cin.ignore(999, '\n'); //버퍼 청소
+		cin.ignore(999, '\n');						//버퍼 청소
 		std::cout << "[ Y / N ] : ";
 		std::cin >> check;
-		check = toupper(check); // 대문자 전환
+		check = toupper(check);						// 대문자 전환
 	} while ((check != 'Y') && (check != 'N'));
 	if (check == 'N')
 		return;
@@ -176,7 +174,7 @@ void ClientManager::ModiObj()
 		Sleep(1000);
 		return;
 	}
-	client = clientList.find(id)->second; // 찾아서 클라이언트 객체를 할당
+	client = clientList.find(id)->second;			// 찾아서 클라이언트 객체를 할당
 	std::cout << "현재 이름 : [ " << client->GetName() << " ]" << std::endl;
 	std::cout << "수정할 이름 : ";
 	std::cin >> tmp;
@@ -188,8 +186,8 @@ void ClientManager::ModiObj()
 	std::cout << "현재 주소 : [ " << client->GetAddress() << " ]" << std::endl;
 	std::cout << "수정할 주소 : ";
 	std::cin.clear();
-	cin.ignore(999, '\n'); //버퍼 청소 필요
-	std::getline(std::cin, tmp, '\n');  // 한줄 전체를 받아야 함으로 getline() 사용
+	cin.ignore(999, '\n');							//버퍼 청소 필요
+	std::getline(std::cin, tmp, '\n');				// 한줄 전체를 받아야 함으로 getline() 사용
 	client->SetAddress(tmp);
 	std::cout << "현재 E-mail : [ " << client->GetEmail() << " ]" << std::endl;
 	std::cout << "수정할 E-mail : ";
@@ -284,7 +282,7 @@ void ClientManager::printClientForm(map<int, Client*> &clientList) const
 		cout.fill('0');
 		std::cout.width(C_ID_WIDTH);
 		std::cout << itr->first;
-		cout.fill(' '); // 공간 채움을 공백으로 다시 변경
+		cout.fill(' ');								// 공간 채움을 공백으로 다시 변경
 		std::cout << " ";
 		///////////////////// 이름 칸 양식
 		std::cout << "  ";

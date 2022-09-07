@@ -14,7 +14,6 @@ string Product::GetName() const
 {
 	return m_name;
 }
-
 string Product::GetBrand() const
 {
 	return m_brand;

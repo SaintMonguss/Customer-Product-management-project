@@ -12,10 +12,10 @@ using std::string;
 class Order
 {
 private:
-	const int m_orderId; // 주문의 식별 번호
+	const int m_orderId;		// 주문의 식별 번호
 	Date m_date;
 	string m_productName;
-	int m_clientId; // 구매자 식별 번호
+	int m_clientId;				// 구매자 식별 번호
 	int m_orderPrice;
 	int m_orderStock;
 	int m_productId;

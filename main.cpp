@@ -26,7 +26,7 @@ int main()
 		case 3:
 			PrintUI::PrintOrderUI(OM);
 			break;
-		case 4: // 종료
+		case 4:													// 종료
 			break;
 		default:
 			std::cout << "잘못된 명령입니다" << std::endl;

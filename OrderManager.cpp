@@ -9,7 +9,6 @@
 // 생성자 파일 불러오기
 OrderManager::OrderManager(Manager* CM, Manager* PM) : CM(CM), PM(PM) 
 {
-	//	std::vector<Client*> vecList;
 	std::ifstream file;
 	file.open("orderlist.txt");
 	if (!file.fail()) {
@@ -27,7 +26,6 @@ OrderManager::OrderManager(Manager* CM, Manager* PM) : CM(CM), PM(PM)
 				int stock = atoi(row[8].c_str());
 				Order* c = new Order(id, date, row[4], productId, clientId, price, stock);
 				orderList.insert({ id, c });
-				//				vecList.push_back(c);
 			}
 		}
 	}
@@ -96,10 +94,10 @@ void OrderManager::AddObj()
 		{
 			return;
 		}
-	} while (!(PM->TossObj(num))); // 예외 체크
-	product = static_cast<Product*>(PM->TossObj(num)); //void* 를 Product*로 캐스팅한뒤 이름을 받아와서 input에 대입
+	} while (!(PM->TossObj(num)));							// 예외 체크
+	product = static_cast<Product*>(PM->TossObj(num));		//void* 를 Product*로 캐스팅한뒤 이름을 받아와서 input에 대입
 	input = product -> GetName(); 
-	stockCheck = product->GetStock(); // 현재 수량 저장
+	stockCheck = product->GetStock();						// 현재 수량 저장
 	order->SetProductId(num);
 	order->SetProductName(input);
 	do
@@ -151,7 +149,7 @@ void OrderManager::AddObj()
 	}
 	std::cout << std::endl;
 	std::cout << "주문 이력 등록 완료!";
-	Sleep(1500); //화면 지연
+	Sleep(1500);											//화면 지연
 	system("cls");
 	return;
 }
@@ -187,14 +185,14 @@ void OrderManager::DelObj()
 		Sleep(1000);
 		return;
 	}
-	order = orderList.find(id)->second; // 찾아서 클라이언트 객체를 할당
+	order = orderList.find(id)->second;					// 찾아서 클라이언트 객체를 할당
 	std::cout << "[" << order->GetOrderId() << "]" << " 번 주문 이력을 삭제 하시겠습니까?" << std::endl;
 	do
 	{
-		cin.ignore(999, '\n'); //버퍼 청소
+		cin.ignore(999, '\n');							//버퍼 청소
 		std::cout << "[ Y / N ] : ";
 		std::cin >> check;
-		check = toupper(check); // 대문자 전환
+		check = toupper(check);							// 대문자 전환
 	} while ((check != 'Y') && (check != 'N'));
 	if (check == 'N')
 		return;
@@ -233,7 +231,7 @@ void OrderManager::ModiObj()
 		Sleep(1000);
 		return;
 	}
-	order = orderList.find(id)->second; // 찾아서 클라이언트 객체를 할당
+	order = orderList.find(id)->second;					// 찾아서 클라이언트 객체를 할당
 	std::cout << "현재 수량 : [ " << order->GetOrderStock() << " ]" << std::endl;
 	std::cout << "수정할 수량 : ";
 	num = InputFormat::IntCin();
@@ -300,7 +298,7 @@ void OrderManager::SerchObj()
 	std::cout << std::endl;
 	std::cout << "이전 화면으로 돌아가려면 enter를 입력해 주세요...";
 	while (getchar() != '\n');
-	getchar(); // 제어 흐름 정지
+	getchar();										// 제어 흐름 정지
 	return;
 	
 }
@@ -313,7 +311,7 @@ void OrderManager::PrintObj()
 	std::cout << std::endl;
 	std::cout << "이전 화면으로 돌아가려면 enter를 입력해 주세요...";
 	while (getchar() != '\n');
-	getchar(); // 제어 흐름 정지
+	getchar();										// 제어 흐름 정지
 	return;
 }
 
@@ -348,7 +346,7 @@ void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 		cout.fill('0');
 		std::cout.width(O_ID_WIDTH);
 		std::cout << itr->first;
-		cout.fill(' '); // 공간 채움을 공백으로 다시 변경
+		cout.fill(' ');								// 공간 채움을 공백으로 다시 변경
 		std::cout << " ";
 		///////////////////// 날짜 양식
 		std::cout << "   ";
@@ -365,7 +363,7 @@ void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 		std::cout.width(O_CLIENTID_WIDTH);
 		cout.fill('0');
 		std::cout << order->GetClientId();
-		cout.fill(' '); // 공간 채움을 공백으로 다시 변경
+		cout.fill(' ');								// 공간 채움을 공백으로 다시 변경
 		std::cout << "  ";
 		///////////////////// 제품 명 양식
 		std::cout << "  ";
@@ -377,7 +375,7 @@ void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 		cout.fill('0');
 		std::cout.width(O_PRODUCTID_WIDTH);
 		std::cout << order->GetProductId();
-		cout.fill(' '); // 공간 채움을 공백으로 다시 변경
+		cout.fill(' ');								// 공간 채움을 공백으로 다시 변경
 		std::cout << " ";
 		///////////////////// 가격 양식
 		std::cout << "  ";
