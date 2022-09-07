@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-// 이름 그대로 정수만 입력 받기 위한 함수
+// 정수만 입력 받기 위한 함수
+
 int InputFormat::IntCin()
 {
 	int num;

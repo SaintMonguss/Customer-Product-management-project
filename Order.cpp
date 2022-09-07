@@ -3,8 +3,8 @@
 #include <iostream>
 
 Order::Order(const int id) : m_orderId(id) {}
-Order::Order(const int id, Date date, string productName, int clientId, int orderPrice, int orderStock) :
-	m_orderId(id), m_date(date), m_productName(productName), m_clientId(clientId),
+Order::Order(const int id, Date date, string productName, int productId, int clientId, int orderPrice, int orderStock) :
+	m_orderId(id), m_date(date), m_productName(productName), m_productId(productId), m_clientId(clientId),
 	m_orderPrice(orderPrice), m_orderStock(orderStock) {}
 
 
@@ -33,10 +33,19 @@ string Order::GetProductName() const
 	return m_productName;
 }
 
+int Order::GetProductId() const
+{
+	return m_productId;
+}
+
 
 void Order::SetClientId(int clientId)
 {
 	m_clientId = clientId;
+}
+void Order::SetProductId(int productId)
+{
+	m_productId = productId;
 }
 void Order::SetOrderPrice(int orderPrice)
 {

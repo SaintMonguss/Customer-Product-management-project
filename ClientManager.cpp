@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <windows.h>
 
+//だ橾 碳楝螃晦
 ClientManager::ClientManager()
 {
 //	std::vector<Client*> vecList;
@@ -25,6 +26,7 @@ ClientManager::ClientManager()
 	file.close();
 }
 
+//だ橾 盪濰
 ClientManager::~ClientManager()
 {
 	std::ofstream file;
@@ -63,19 +65,22 @@ void ClientManager::AddObj()
 		std::cout << "詭賅葬 й渡 褒ぬ";
 		return;
 	}
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
-	std::cout << "                                           褐敘 堅偌 蛔煙                                   " << std::endl;
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "                                                           褐敘 堅偌 蛔煙" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
 	std::cout << std::endl;;
+	std::cout << "菴煎 陛堅 談棻賊 -1 殮溘" << std::endl << std::endl;
 	std::cout << "檜葷 : ";
 	std::cin >> input;
+	if (atoi(input.c_str()) == -1)
+		return;
 	client->SetName(input);
 	std::cout << "翱塊籀( - 橈檜 殮溘) : ";
 	std::cin >> input;
 	client->SetPhoneNumber(input);
 	std::cout << "輿模 : ";
 	cin.ignore(999, '\n'); //幗ぷ 羶模
-	std::getline(std::cin, input, '\n'); //TODO: 32旋濠 梱雖 嫡擊熱 氈啪 薯и п撿л
+	std::getline(std::cin, input, '\n');  // и還 瞪羹蒂 嫡嬴撿 л戲煎 getline() 餌辨
 	client->SetAddress(input);
 	std::cout << "E-mail : ";
 	std::cin >> input;
@@ -110,13 +115,15 @@ void ClientManager::DelObj()
 	printClientForm(clientList);
 	std::cout << std::endl;;
 	std::cout << std::endl;;
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
-	std::cout << "                                           堅偌 薑爾 餉薯" << std::endl;
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "                                                         堅偌 薑爾 餉薯" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
 	std::cout << std::endl; 
+	std::cout << "菴煎 陛堅 談棻賊 -1 殮溘" << std::endl << std::endl;
 	std::cout << "餉薯й 堅偌曖 ID蒂 殮溘 п輿撮蹂 : ";
 	id = InputFormat::IntCin();
-
+	if (id == -1)
+		return;
 	try
 	{
 		clientList.at(id);
@@ -150,12 +157,15 @@ void ClientManager::ModiObj()
 	Client* client;
 	string tmp;
 
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
-	std::cout << "                                           堅偌 薑爾 熱薑" << std::endl;
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "                                                            堅偌 薑爾 熱薑" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
 	std::cout << std::endl;
+	std::cout << "菴煎 陛堅 談棻賊 -1 殮溘" << std::endl << std::endl;
 	std::cout << "熱薑й 堅偌曖 ID蒂 殮溘 п輿撮蹂 : ";
 	id = InputFormat::IntCin();
+	if (id == -1)
+		return;
 	try
 	{
 		clientList.at(id);
@@ -177,7 +187,9 @@ void ClientManager::ModiObj()
 	client->SetPhoneNumber(tmp);
 	std::cout << "⑷營 輿模 : [ " << client->GetAddress() << " ]" << std::endl;
 	std::cout << "熱薑й 輿模 : ";
-	std::cin >> tmp;
+	std::cin.clear();
+	cin.ignore(999, '\n'); //幗ぷ 羶模 в蹂
+	std::getline(std::cin, tmp, '\n');  // и還 瞪羹蒂 嫡嬴撿 л戲煎 getline() 餌辨
 	client->SetAddress(tmp);
 	std::cout << "⑷營 E-mail : [ " << client->GetEmail() << " ]" << std::endl;
 	std::cout << "熱薑й E-mail : ";
@@ -197,9 +209,9 @@ void ClientManager::SerchObj()
 
 	system("cls");
 
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
-	std::cout << "                                           堅偌 薑爾 匐儀" << std::endl;
-	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
+	std::cout << "                                                        堅偌 薑爾 匐儀" << std::endl;
+	std::cout << "式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式" << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "匐儀й 渠鼻曖 檜葷擊 殮溘п 輿撮蹂 : ";

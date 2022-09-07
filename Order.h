@@ -18,22 +18,25 @@ private:
 	int m_clientId; // 구매자 식별 번호
 	int m_orderPrice;
 	int m_orderStock;
+	int m_productId;
 	
 
 public:
 	Order(const int );
-	Order(const int, Date, string, int, int, int);
+	Order(const int, Date, string, int, int, int, int);
 
 	int GetOrderId() const;
 	int GetClientId() const;
+	int GetProductId() const;
 	int GetOrderPrice() const;
 	int GetOrderStock() const;
 	Date GetDate() const;
 	string GetProductName() const;
 
 
+
 	void SetClientId(int);
-	void SetBrand(string);
+	void SetProductId(int);
 	void SetOrderPrice(int);
 	void SetOrderStock(int);
 	void SetDate(Date);

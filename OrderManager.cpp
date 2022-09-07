@@ -21,10 +21,11 @@ OrderManager::OrderManager(Manager* CM, Manager* PM) : CM(CM), PM(PM)
 				date.SetYear(atoi(row[1].c_str()));
 				date.SetMonth(atoi(row[2].c_str()));
 				date.SetDay(atoi(row[3].c_str()));
-				int clientId = atoi(row[5].c_str());
-				int price = atoi(row[6].c_str());
-				int stock = atoi(row[7].c_str());
-				Order* c = new Order(id, date, row[4], clientId, price, stock);
+				int productId = atoi(row[5].c_str());
+				int clientId = atoi(row[6].c_str());
+				int price = atoi(row[7].c_str());
+				int stock = atoi(row[8].c_str());
+				Order* c = new Order(id, date, row[4], productId, clientId, price, stock);
 				orderList.insert({ id, c });
 				//				vecList.push_back(c);
 			}
@@ -46,10 +47,10 @@ OrderManager::~OrderManager()
 			file << c->GetDate().GetMonth() << ", ";
 			file << c->GetDate().GetDay() << ", ";
 			file << c->GetProductName() << ", ";
+			file << c->GetProductId() << ", ";
 			file << c->GetClientId() << ", ";
 			file << c->GetOrderPrice() << ", ";
 			file << c->GetOrderStock() << std::endl;
-			
 		}
 	}
 	file.close();
@@ -64,6 +65,7 @@ void OrderManager::AddObj()
 	Order* order;
 	Product *product;
 	Date date;
+	int stockCheck;
 	int num;
 	int id;
 	
@@ -81,9 +83,9 @@ void OrderManager::AddObj()
 		std::cout << "¸Þ¸ð¸® ÇÒ´ç ½ÇÆÐ";
 		return;
 	}
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           ½Å±Ô ÁÖ¹® µî·Ï" << std::endl;
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "                                                            ½Å±Ô ÁÖ¹® µî·Ï" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;;
 	std::cout << "µÚ·Î °¡°í ½Í´Ù¸é -1 ÀÔ·Â" << std::endl << std::endl;
 	do
@@ -95,8 +97,10 @@ void OrderManager::AddObj()
 			return;
 		}
 	} while (!(PM->TossObj(num))); // ¿¹¿Ü Ã¼Å©
-	product = static_cast<Product*>(PM->TossObj(num));
-	input = product -> GetName(); //std::any¸¦ Product*·Î Ä³½ºÆÃÇÑµÚ ÀÌ¸§À» ¹Þ¾Æ¿Í¼­ input¿¡ ´ëÀÔ
+	product = static_cast<Product*>(PM->TossObj(num)); //void* ¸¦ Product*·Î Ä³½ºÆÃÇÑµÚ ÀÌ¸§À» ¹Þ¾Æ¿Í¼­ input¿¡ ´ëÀÔ
+	input = product -> GetName(); 
+	stockCheck = product->GetStock(); // ÇöÀç ¼ö·® ÀúÀå
+	order->SetProductId(num);
 	order->SetProductName(input);
 	do
 	{
@@ -121,11 +125,17 @@ void OrderManager::AddObj()
 	// ÁÖ¹® ¼ö·® ¼³Á¤
 	std::cout << "±¸¸Å ¼ö·® : ";
 	num = InputFormat::IntCin();
+
 	order->SetOrderStock(num);
+	if (stockCheck < num)
+	{
+		std::wcout << std::endl;
+		std::cout << "°æ°í! ÇöÀç »óÇ° ¼ö·®º¸´Ù ÁÖ¹®·®ÀÌ ¸¹½À´Ï´Ù. È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù. " << std::endl;
+	}
 	// ÁÖ¹® °¡°Ý ¼³Á¤
 	order->SetOrderPrice(product->GetPrice());
+	Sleep(1500); //È­¸é Áö¿¬
 	
-
 	try
 	{
 		auto tmp = (orderList.insert({ id, order }));
@@ -139,6 +149,7 @@ void OrderManager::AddObj()
 		std::cout << std::endl;
 		return;
 	}
+	std::cout << std::endl;
 	std::cout << "ÁÖ¹® ÀÌ·Â µî·Ï ¿Ï·á!";
 	Sleep(1500); //È­¸é Áö¿¬
 	system("cls");
@@ -156,13 +167,16 @@ void OrderManager::DelObj()
 	printOrderForm(orderList);
 	std::cout << std::endl;;
 	std::cout << std::endl;;
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           ÁÖ¹® ÀÌ·Â »èÁ¦" << std::endl;
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "                                                          ÁÖ¹® ÀÌ·Â »èÁ¦" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+
 	std::cout << std::endl; 
+	std::cout << "µÚ·Î °¡°í ½Í´Ù¸é -1 ÀÔ·Â" << std::endl << std::endl;
 	std::cout << "»èÁ¦ÇÒ ÁÖ¹®ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
 	id = InputFormat::IntCin();
-
+	if (id == -1)
+		return;
 	try
 	{
 		orderList.at(id);
@@ -198,14 +212,17 @@ void OrderManager::ModiObj()
 	Order* order;
 	string tmp;
 
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           ÁÖ¹® ÀÌ·Â ¼öÁ¤" << std::endl;
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "                                                       ÁÖ¹® ÀÌ·Â ¼öÁ¤" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;
 	std::cout << "¼öÁ¤ÇÒ ¼ö ÀÖ´Â Ç×¸ñÀº ÁÖ¹® ¼ö·®°ú ³¯Â¥ÀÔ´Ï´Ù.";
-	std::cout << std::endl << std::endl;
+	std::cout << std::endl;
+	std::cout << "µÚ·Î °¡°í ½Í´Ù¸é -1 ÀÔ·Â" << std::endl << std::endl;
 	std::cout << "¼öÁ¤ÇÒ ÁÖ¹®ÀÇ ID¸¦ ÀÔ·Â ÇØÁÖ¼¼¿ä : ";
 	id = InputFormat::IntCin();
+	if (id == -1)
+		return;
 	try
 	{
 		orderList.at(id);
@@ -256,14 +273,15 @@ void OrderManager::SerchObj()
 
 	system("cls");
 
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
-	std::cout << "                                           ÁÖ¹® ÀÌ·Â °Ë»ö" << std::endl;
-	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
+	std::cout << "                                                          ÁÖ¹® ÀÌ·Â °Ë»ö" << std::endl;
+	std::cout << "¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡" << std::endl;
 	std::cout << std::endl;
-
+	std::cout << "µÚ·Î °¡°í ½Í´Ù¸é -1 ÀÔ·Â" << std::endl << std::endl;
 	std::cout << "°Ë»öÇÒ ÀÌ·ÂÀÇ ±¸¸ÅÀÚ ID¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä : ";
 	id = InputFormat::IntCin();
-
+	if (id == -1)
+		return;
 	for (auto itr = orderList.begin(); itr != orderList.end(); itr++)
 	{
 		if (id == itr->second->GetClientId())
@@ -328,39 +346,50 @@ void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 		std::cout << "¦¢ ";
 		///////////////////// ID Ä­ ¾ç½Ä
 		cout.fill('0');
-		std::cout.width(C_ID_WIDTH);
+		std::cout.width(O_ID_WIDTH);
 		std::cout << itr->first;
 		cout.fill(' '); // °ø°£ Ã¤¿òÀ» °ø¹éÀ¸·Î ´Ù½Ã º¯°æ
 		std::cout << " ";
 		///////////////////// ³¯Â¥ ¾ç½Ä
 		std::cout << "   ";
-		std::cout
-			<< order->GetDate().GetYear() << "³â "
-			<< order->GetDate().GetMonth() << "¿ù "
-			<< order->GetDate().GetDay() << "ÀÏ";
+		std::cout << order->GetDate().GetYear() << "³â ";
+		std::cout.width(2);
+		std::cout << order->GetDate().GetMonth();
+		std::cout << "¿ù ";
+		std::cout.width(2);
+		std::cout << order->GetDate().GetDay();
+		std::cout << "ÀÏ";
 		std::cout << "  ";
 		///////////////////// ±¸¸ÅÀÚ ¾ÆÀÌµð ¾ç½Ä
-		std::cout << "   ";
-		std::cout.width(6);
+		std::cout << "  ";
+		std::cout.width(O_CLIENTID_WIDTH);
 		cout.fill('0');
 		std::cout << order->GetClientId();
 		cout.fill(' '); // °ø°£ Ã¤¿òÀ» °ø¹éÀ¸·Î ´Ù½Ã º¯°æ
 		std::cout << "  ";
 		///////////////////// Á¦Ç° ¸í ¾ç½Ä
 		std::cout << "  ";
-		std::cout.width(48);
+		std::cout.width(O_PRODUCTNAME_WIDTH);
 		std::cout << order->GetProductName();
 		std::cout << " ";
-		///////////////////// °¡°Ý ¾ç½Ä
-		std::cout.width(10);
-		std::cout << order->GetOrderPrice();
+		///////////////////// Á¦Ç° ID ¾ç½Ä
 		std::cout << "  ";
+		cout.fill('0');
+		std::cout.width(O_PRODUCTID_WIDTH);
+		std::cout << order->GetProductId();
+		cout.fill(' '); // °ø°£ Ã¤¿òÀ» °ø¹éÀ¸·Î ´Ù½Ã º¯°æ
+		std::cout << " ";
+		///////////////////// °¡°Ý ¾ç½Ä
+		std::cout << "  ";
+		std::cout.width(O_PRICE_WIDTH);
+		std::cout << order->GetOrderPrice();
+		std::cout << " ";
 		///////////////////// ¼ö·® ¾ç½Ä
-		std::cout.width(C_EMAIL_WIDTH);
+		std::cout.width(O_STOCK_WIDTH);
 		std::cout << order->GetOrderStock();
 		std::cout << " ¦¢" << std::endl;
 	}
-	std::cout << "¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥" << std::endl;;
+	std::cout << "¦¦¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦ª¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¥" << std::endl;;
 	return;
 }
 

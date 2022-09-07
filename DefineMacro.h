@@ -8,7 +8,11 @@
 #define C_EMAIL_WIDTH 24
 
 #define O_ID_WIDTH 6
-#define O_NAME_WIDTH 6
+#define O_CLIENTID_WIDTH 6
+#define O_PRODUCTNAME_WIDTH 42
+#define O_PRODUCTID_WIDTH 6
+#define O_PRICE_WIDTH 16
+#define O_STOCK_WIDTH 13
 
 
 #define P_ID_WIDTH 6
