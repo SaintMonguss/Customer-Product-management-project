@@ -319,12 +319,12 @@ void* OrderManager::TossObj(int id)
 void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 {
 	Order* order;
-	std::cout << "┌───────┬───────────┬──────────────┬────────────────────────────────────────────────────────────────┬─────────────────────────┐" << std::endl;;
-	std::cout << "│   ID       날자          구매자 id                                  상품 이름                  가격               수량        │" << std::endl;;
+	std::cout << "┌───────┬───────────────────┬──────────┬────────────────────────────────────────────┬────────┬──────────────────┬──────────────┐" << std::endl;;
+	std::cout << "│   ID          주문일        구매자 ID                      상품 이름                상품 ID         가격            수량     │" << std::endl;;
 	for (auto itr = orderList.begin(); itr != orderList.end(); itr++)
 	{
 		order = itr->second;
-		std::cout << "├───────┼───────────┼──────────────┼────────────────────────────────────────────────────────────────┼─────────────────────────┤" << std::endl;;
+		std::cout << "├───────┼───────────────────┼──────────┼────────────────────────────────────────────┼────────┼──────────────────┼──────────────┤" << std::endl;;
 		std::cout << "│ ";
 		///////////////////// ID 칸 양식
 		cout.fill('0');
@@ -333,20 +333,26 @@ void OrderManager::printOrderForm(map<int, Order*> &orderList) const
 		cout.fill(' '); // 공간 채움을 공백으로 다시 변경
 		std::cout << " ";
 		///////////////////// 날짜 양식
-		std::cout << "  ";
-		std::cout.width(C_NAME_WIDTH);
+		std::cout << "   ";
 		std::cout
 			<< order->GetDate().GetYear() << "년 "
 			<< order->GetDate().GetMonth() << "월 "
 			<< order->GetDate().GetDay() << "일";
 		std::cout << "  ";
+		///////////////////// 구매자 아이디 양식
+		std::cout << "   ";
+		std::cout.width(6);
+		cout.fill('0');
+		std::cout << order->GetClientId();
+		cout.fill(' '); // 공간 채움을 공백으로 다시 변경
+		std::cout << "  ";
 		///////////////////// 제품 명 양식
 		std::cout << "  ";
-		std::cout.width(C_PHONNUMBER_WIDTH);
+		std::cout.width(48);
 		std::cout << order->GetProductName();
-		std::cout << "  ";
+		std::cout << " ";
 		///////////////////// 가격 양식
-		std::cout.width(C_ADRESS_WIDTH);
+		std::cout.width(10);
 		std::cout << order->GetOrderPrice();
 		std::cout << "  ";
 		///////////////////// 수량 양식
