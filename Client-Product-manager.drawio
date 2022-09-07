@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-07T06:19:12.873Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="XNrrSrDN0VsAj9Xl6Rww" version="20.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-07T06:22:13.225Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36" etag="Re3vEwaZZcTANs862GRH" version="20.2.7" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="631" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -126,39 +126,30 @@
           <mxGeometry y="112" width="160" height="98" as="geometry" />
         </mxCell>
         <mxCell id="dSIF6ux1lkkKH9eFS6yE-34" value="&lt;&lt;abstract&gt;&gt;&#xa;Manager" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="220" y="10" width="160" height="422" as="geometry">
+          <mxGeometry x="220" y="10" width="160" height="240" as="geometry">
             <mxRectangle x="10" y="10" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dSIF6ux1lkkKH9eFS6yE-40" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
           <mxGeometry y="40" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-41" value="+ Clinet(int) " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
+        <mxCell id="dSIF6ux1lkkKH9eFS6yE-41" value="+ AddObj()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
           <mxGeometry y="80" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-42" value="+ GetName() string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
+        <mxCell id="dSIF6ux1lkkKH9eFS6yE-42" value="+ DelObj()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
           <mxGeometry y="106" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-43" value="+ GetPhoneNumber() string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
+        <mxCell id="dSIF6ux1lkkKH9eFS6yE-43" value="+ ModiObj()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
           <mxGeometry y="132" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-44" value="+ GetAddress() string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
+        <mxCell id="dSIF6ux1lkkKH9eFS6yE-44" value="+ SerchObj()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
           <mxGeometry y="158" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-45" value="+ GetEmail() string" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
+        <mxCell id="dSIF6ux1lkkKH9eFS6yE-45" value="+ PrintObj()" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
           <mxGeometry y="184" width="160" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-46" value="+ SetNamel(string)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
+        <mxCell id="dSIF6ux1lkkKH9eFS6yE-46" value="+ TossObj() void*" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
           <mxGeometry y="210" width="160" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-47" value="+ SetPhoneNumberl(string)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
-          <mxGeometry y="236" width="160" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-48" value="+ SetAddressl(string)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
-          <mxGeometry y="262" width="160" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="dSIF6ux1lkkKH9eFS6yE-49" value="+ SetEmaill(string)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="dSIF6ux1lkkKH9eFS6yE-34">
-          <mxGeometry y="288" width="160" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
